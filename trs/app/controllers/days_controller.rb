@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DaysController < ApplicationController
-  before_action :set_day, only: %i[ show edit update destroy ]
+  before_action :set_day, only: %i[show edit update destroy]
 
   # GET /days or /days.json
   def index
@@ -25,7 +27,7 @@ class DaysController < ApplicationController
 
     respond_to do |format|
       if @day.save
-        format.html { redirect_to @day, notice: "Day was successfully created." }
+        format.html { redirect_to @day, notice: 'Day was successfully created.' }
         format.json { render :show, status: :created, location: @day }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class DaysController < ApplicationController
   def update
     respond_to do |format|
       if @day.update(day_params)
-        format.html { redirect_to @day, notice: "Day was successfully updated." }
+        format.html { redirect_to @day, notice: 'Day was successfully updated.' }
         format.json { render :show, status: :ok, location: @day }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,19 +53,20 @@ class DaysController < ApplicationController
   def destroy
     @day.destroy
     respond_to do |format|
-      format.html { redirect_to days_url, notice: "Day was successfully destroyed." }
+      format.html { redirect_to days_url, notice: 'Day was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_day
-      @day = Day.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def day_params
-      params.require(:day).permit(:name, :description, :start_waypoint_id, :end_waypoint_id, :start_at, :trip_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_day
+    @day = Day.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def day_params
+    params.require(:day).permit(:name, :description, :start_waypoint_id, :end_waypoint_id, :start_at, :trip_id)
+  end
 end
