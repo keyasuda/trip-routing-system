@@ -1,0 +1,35 @@
+<div id="<%= dom_id day %>" class="scaffold_record">
+  <p>
+    <strong>Name:</strong>
+    <%= day.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= day.description %>
+  </p>
+
+  <p>
+    <strong>Start waypoint:</strong>
+    <%= day.start_waypoint_id %>
+  </p>
+
+  <p>
+    <strong>End waypoint:</strong>
+    <%= day.end_waypoint_id %>
+  </p>
+
+  <p>
+    <strong>Start at:</strong>
+    <%= day.start_at %>
+  </p>
+
+  <p>
+    <strong>Trip:</strong>
+    <%= day.trip_id %>
+  </p>
+
+  <p>
+    <%= link_to "Show this day", day %>
+  </p>
+</div>
