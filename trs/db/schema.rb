@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_03_094046) do
+ActiveRecord::Schema.define(version: 2021_10_03_131519) do
 
   create_table "days", force: :cascade do |t|
     t.string "name"
@@ -31,5 +31,19 @@ ActiveRecord::Schema.define(version: 2021_10_03_094046) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "waypoints", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "longitude"
+    t.float "latitude"
+    t.integer "stop_min"
+    t.integer "index"
+    t.integer "day_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["day_id"], name: "index_waypoints_on_day_id"
+  end
+
   add_foreign_key "days", "trips"
+  add_foreign_key "waypoints", "days"
 end

@@ -1,0 +1,9 @@
+<h1>New waypoint</h1>
+
+<%= render "form", trip: @trip, day: @day, waypoint: @waypoint %>
+
+<br>
+
+<div>
+  <%= link_to "Back to waypoints", trip_day_waypoints_path([@trip, @day]) %>
+</div>

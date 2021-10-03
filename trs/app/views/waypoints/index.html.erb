@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Waypoint</h1>
+
+<div id="waypoints">
+  <%= render @waypoints %>
+</div>
+
+<%= link_to "New waypoint", new_trip_day_waypoint_path([@trip, @day]) %>

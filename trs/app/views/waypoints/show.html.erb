@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<%= render @waypoint %>
+
+<div>
+  <%= link_to "Edit this waypoint", edit_trip_day_waypoint_path([@trip, @day, @waypoint]) %> |
+  <%= link_to "Back to waypoints", trip_day_waypoints_path([@trip, @day]) %>
+
+  <%= button_to "Destroy this waypoint", trip_day_waypoint_path([@trip, @day, @waypoint]), method: :delete %>
+</div>
