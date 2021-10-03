@@ -1,0 +1,28 @@
+version: "3"
+
+volumes:
+  osm-pgdata:
+  osm-tiles:
+  valhalla_tiles:
+
+services:
+  openstreetmap-tile-server:
+    build: ./openstreetmap-tile-server/
+    ports:
+      - "8001:80"
+    volumes:
+      - osm-pgdata:/var/lib/postgresql/12/main
+      - osm-tiles:/var/lib/mod_tile
+      - type: bind
+        source: "./osm-data/japan-latest.osm.pbf"
+        target: "/data.osm.pbf"
+
+  valhalla:
+    build: ./valhalla/
+    ports:
+      - "8002:8002"
+    volumes:
+      - "valhalla_tiles:/data"
+      - type: bind
+        source: "./osm-data/japan-latest.osm.pbf"
+        target: "/data.osm.pbf"
