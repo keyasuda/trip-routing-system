@@ -3,8 +3,8 @@
 <%= render @day %>
 
 <div>
-  <%= link_to "Edit this day", edit_day_path(@day) %> |
-  <%= link_to "Back to days", days_path %>
+  <%= link_to "Edit this day", edit_trip_day_path([@trip, @day]) %> |
+  <%= link_to "Back to days", trip_days_path(@trip) %>
 
-  <%= button_to "Destroy this day", day_path(@day), method: :delete %>
+  <%= button_to "Destroy this day", trip_day_path([@trip, @day]), method: :delete %>
 </div>

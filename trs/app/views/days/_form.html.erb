@@ -1,4 +1,4 @@
-<%= form_with(model: day) do |form| %>
+<%= form_with(model: [trip, day]) do |form| %>
   <% if day.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(day.errors.count, "error") %> prohibited this day from being saved:</h2>
