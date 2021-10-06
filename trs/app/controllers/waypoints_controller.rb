@@ -28,7 +28,7 @@ class WaypointsController < ApplicationController
 
     respond_to do |format|
       if @waypoint.save
-        format.html { redirect_to [@trip, @day, @waypoint], notice: 'Waypoint was successfully created.' }
+        format.html { redirect_to [@trip, @day], notice: 'Waypoint was successfully created.' }
         format.json { render :show, status: :created, location: @waypoint }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class WaypointsController < ApplicationController
   def update
     respond_to do |format|
       if @waypoint.update(waypoint_params)
-        format.html { redirect_to [@trip, @day, @waypoint], notice: 'Waypoint was successfully updated.' }
+        format.html { redirect_to [@trip, @day], notice: 'Waypoint was successfully updated.' }
         format.json { render :show, status: :ok, location: @waypoint }
       else
         format.html { render :edit, status: :unprocessable_entity }

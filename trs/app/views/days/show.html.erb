@@ -1,10 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<%= render @day %>
+<div data-controller="days" data-days-waypoints-value="<%= @day.waypoints.to_json %>">
+  <div data-days-target="map" style="height: 400px"></div>
+  <button data-action="click -> days#reset">reset</button>
 
-<div>
-  <%= link_to "Edit this day", edit_trip_day_path([@trip, @day]) %> |
-  <%= link_to "Back to days", trip_days_path(@trip) %>
+  <%= render @day %>
 
-  <%= button_to "Destroy this day", trip_day_path([@trip, @day]), method: :delete %>
+  <div>
+    <%= link_to "Edit this day", edit_trip_day_path([@trip, @day]) %> |
+    <%= link_to "Back to days", trip_days_path(@trip) %>
+
+    <%= button_to "Destroy this day", trip_day_path([@trip, @day]), method: :delete %>
+  </div>
+
+  <h2>Waypoints</h2>
+  <%= turbo_frame_tag :waypoints, src: trip_day_waypoints_path(@trip, @day) do %>
+  <% end %>
 </div>

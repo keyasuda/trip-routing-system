@@ -35,6 +35,6 @@
   </p>
 
   <p>
-    <%= link_to "Show this waypoint", [waypoint.day.trip, waypoint.day, waypoint] %>
+    <%= link_to "Edit this waypoint", edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), target: '_top' %>
   </p>
 </div>
