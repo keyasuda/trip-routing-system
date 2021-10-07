@@ -15,7 +15,7 @@ class WaypointsController < ApplicationController
 
   # GET /waypoints/new
   def new
-    @waypoint = @day.waypoints.build
+    @waypoint = @day.waypoints.build(latitude: 35, longitude: 135)
   end
 
   # GET /waypoints/1/edit

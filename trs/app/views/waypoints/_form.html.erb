@@ -1,4 +1,6 @@
-<%= form_with(model: [trip, day, waypoint]) do |form| %>
+<%= form_with(model: [trip, day, waypoint], data: {controller: 'waypoints'}) do |form| %>
+  <div data-waypoints-target="map" style="height: 400px"></div>
+
   <% if waypoint.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(waypoint.errors.count, "error") %> prohibited this waypoint from being saved:</h2>
@@ -22,13 +24,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude %>
+    <%= form.hidden_field :longitude, data: {waypoints_target: 'longitude'} %>
+    <%= form.hidden_field :latitude, data: {waypoints_target: 'latitude'} %>
   </div>
 
   <div class="field">
@@ -39,11 +36,6 @@
   <div class="field">
     <%= form.label :index %>
     <%= form.number_field :index %>
-  </div>
-
-  <div class="field">
-    <%= form.label :day_id %>
-    <%= form.text_field :day_id %>
   </div>
 
   <div class="actions">
