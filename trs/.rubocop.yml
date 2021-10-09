@@ -1,9 +1,12 @@
 inherit_gem:
   fablicop:
-    - "config/.base_rubocop.yml"
+    - 'config/.base_rubocop.yml'
 
 AllCops:
   Exclude:
-    - "bin/*"
-    - "vendor/**/*"
-    - "db/schema.rb"
+    - 'bin/*'
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+
+RSpec/InstanceVariable:
+  Enabled: false
