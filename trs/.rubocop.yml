@@ -10,3 +10,9 @@ AllCops:
 
 RSpec/InstanceVariable:
   Enabled: false
+
+Rails/Output:
+  AutoCorrect: false
+
+Metrics/AbcSize:
+  Max: 24
