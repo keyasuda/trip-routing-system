@@ -42,15 +42,27 @@ RSpec.describe Day, type: :model do
     end
   end
 
-  describe 'route optimizer' do
+  describe 'routes' do
     let(:day) { FactoryBot.create(:unoptimized_day) }
 
-    it 'optimizeses waypoints order' do
-      VCR.use_cassette 'valhalla_optimized_route' do
-        day.optimize!
-      end
+    describe 'optimizer' do
+      it 'optimizeses waypoints order' do
+        VCR.use_cassette 'valhalla_optimized_route' do
+          day.optimize!
+        end
 
-      expect(day.stops.map(&:name)).to eq %w[1 4 3 2]
+        expect(day.stops.map(&:name)).to eq %w[1 4 3 2]
+      end
+    end
+
+    describe 'presentation' do
+      it 'gets routes' do
+        actual = VCR.use_cassette 'valhalla_route' do
+          day.routes
+        end
+
+        expect(actual.flat_map(&:keys).uniq).to eq %w[maneuvers summary shape]
+      end
     end
   end
 end

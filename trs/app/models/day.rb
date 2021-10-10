@@ -30,14 +30,14 @@ class Day < ApplicationRecord
     [start_waypoint, stops, end_waypoint].flatten
   end
 
-  def optimize!(costing = 'auto')
-    locations = ordered_waypoints.map do |w|
-      { 'lat' => w.latitude, 'lon' => w.longitude }
-    end
-    payload = { 'locations' => locations, 'costing' => costing }
+  def routes(costing = 'auto')
+    result = call_valhalla_api('route', costing)
 
-    ret = Faraday.get('http://localhost:8002/optimized_route', { json: payload.to_json })
-    result = JSON.parse(ret.body)
+    result['trip']['legs']
+  end
+
+  def optimize!(costing = 'auto')
+    result = call_valhalla_api('optimized_route', costing)
 
     locations = result['trip']['locations']
     targets = ordered_waypoints
@@ -47,5 +47,17 @@ class Day < ApplicationRecord
         t.update(index: i)
       end
     end
+  end
+
+  private
+
+  def call_valhalla_api(method, costing)
+    locations = ordered_waypoints.map do |w|
+      { 'lat' => w.latitude, 'lon' => w.longitude }
+    end
+    payload = { 'locations' => locations, 'costing' => costing }
+
+    ret = Faraday.get("http://localhost:8002/#{method}", { json: payload.to_json })
+    JSON.parse(ret.body)
   end
 end
