@@ -1,0 +1,15 @@
+{
+  "name": "app",
+  "private": "true",
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo-rails": "^7.0.1",
+    "esbuild": "^0.13.4",
+    "leaflet": "^1.7.1",
+    "leaflet-extra-markers": "^1.2.1",
+    "polyline-encoded": "^0.0.9"
+  }
+}
