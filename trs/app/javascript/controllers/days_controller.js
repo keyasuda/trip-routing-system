@@ -1,9 +1,10 @@
 import { Controller } from '@hotwired/stimulus'
 import L from 'leaflet'
+import 'polyline-encoded'
 
 export default class extends Controller {
   static targets = ['map']
-  static values = { waypoints: Array }
+  static values = { waypoints: Array, routes: Array }
 
   connect() {
     const map = L.map(this.mapTarget)
@@ -24,6 +25,20 @@ export default class extends Controller {
     const group = L.featureGroup(markers)
 
     map.fitBounds(group.getBounds())
+
+    // routes
+    this.routesValue.map((route) => {
+      const coordinates = L.Polyline.fromEncoded(route.shape, 6)
+        .getLatLngs()
+        .map((c) => [c.lat / 10, c.lng / 10])
+
+      L.polyline(coordinates, {
+        color: 'blue',
+        weight: 2,
+        opacity: 1,
+        lineJoin: 'round',
+      }).addTo(map)
+    })
   }
 
   reset() {
