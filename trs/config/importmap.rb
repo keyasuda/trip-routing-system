@@ -12,3 +12,4 @@ pin '@hotwired/stimulus-importmap-autoloader', to: 'stimulus-importmap-autoloade
 pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin 'leaflet', to: 'https://ga.jspm.io/npm:leaflet@1.7.1/dist/leaflet-src.js'
 pin 'polyline-encoded', to: 'https://ga.jspm.io/npm:polyline-encoded@0.0.9/Polyline.encoded.js'
+pin 'leaflet-extra-markers', to: 'https://ga.jspm.io/npm:leaflet-extra-markers@1.2.1/dist/js/leaflet.extra-markers.js'
