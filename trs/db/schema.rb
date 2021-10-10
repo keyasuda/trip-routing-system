@@ -15,8 +15,6 @@ ActiveRecord::Schema.define(version: 2021_10_03_131519) do
   create_table "days", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "start_waypoint_id"
-    t.integer "end_waypoint_id"
     t.datetime "start_at", precision: 6
     t.integer "trip_id", null: false
     t.datetime "created_at", precision: 6, null: false

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div data-controller="days" data-days-waypoints-value="<%= @day.waypoints.to_json %>" data-days-routes-value="<%= @day.routes.to_json %>">
+<div data-controller="days" data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>" data-days-routes-value="<%= @day.routes.to_json %>">
   <div data-days-target="map" style="height: 400px"></div>
   <button data-action="click -> days#reset">reset</button>
 

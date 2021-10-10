@@ -5,29 +5,9 @@ class Day < ApplicationRecord
   has_many :waypoints, dependent: :destroy
   validates :name, presence: true
 
-  def start_waypoint
-    waypoints.find { |w| w.id == start_waypoint_id }
-  end
-
-  def start_waypoint=(point)
-    self.start_waypoint_id = point.id
-  end
-
-  def end_waypoint
-    waypoints.find { |w| w.id == end_waypoint_id }
-  end
-
-  def end_waypoint=(point)
-    self.end_waypoint_id = point.id
-  end
-
-  def stops
-    waypoints.reject { |w| [start_waypoint_id, end_waypoint_id].include?(w.id) }.sort { |a, b| a.index <=> b.index }
-  end
-
-  # ルート計算用に始点終点込みで並べたwaypointsを返す
+  # 並べたwaypointsを返す
   def ordered_waypoints
-    [start_waypoint, stops, end_waypoint].flatten
+    waypoints.sort { |a, b| a.index <=> b.index }
   end
 
   def routes(costing = 'auto')
