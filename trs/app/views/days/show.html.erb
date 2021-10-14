@@ -1,19 +1,53 @@
-<p id="notice"><%= notice %></p>
+<header class="navbar">
+  <section class="navbar-section">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'TRS', '/' %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @trip.name, @trip %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= @day.name %>
+      </li>
+    </ul>
+  </section>
 
-<div data-controller="days" data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>" data-days-routes-value="<%= @day.routes.to_json %>">
-  <div data-days-target="map" style="height: 400px"></div>
-  <button data-action="click -> days#reset">reset</button>
+  <section class="navbar-section">
+    <%= link_to edit_trip_day_path([@trip, @day]), class: 'btn btn-link' do %>
+      <span class="material-icons-outlined">settings</span>
+    <% end %>
+  </section>
+</header>
 
-  <%= render @day %>
+<div id="notice"><%= notice %></div>
 
-  <div>
-    <%= link_to "Edit this day", edit_trip_day_path([@trip, @day]) %> |
-    <%= link_to "Back to days", trip_days_path(@trip) %>
+<div
+  class="container"
+  data-controller="days"
+  data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
+  data-days-routes-value="<%= @day.routes.to_json %>">
+  <div class="columns">
+    <div class="column col-9">
+      <div data-days-target="map"></div>
+    </div>
 
-    <%= button_to "Destroy this day", trip_day_path([@trip, @day]), method: :delete %>
+    <div class="column col-3 days">
+      <% @trip.days.each do |day| %>
+        <div class="card <%= 'active' if day == @day %> day">
+          <div class="card-header">
+            <div class="card-title h5"><%= link_to day.name, [@trip, day] %></div>
+            <div class="card-subtitle text-gray"><%= day.description %></div>
+          </div>
+          <div class="card-body">
+            <ul class="waypoints">
+              <% day.ordered_waypoints.each_with_index do |w, i| %>
+                <%= render partial: 'waypoints/waypoint', locals: {waypoint: w, i: i, size: day.waypoints.size} %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <h2>Waypoints</h2>
-  <%= turbo_frame_tag :waypoints, src: trip_day_waypoints_path(@trip, @day) do %>
-  <% end %>
 </div>

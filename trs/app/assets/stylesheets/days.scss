@@ -1,0 +1,45 @@
+div[data-days-target] {
+  height: calc(100vh - 48px);
+}
+
+.days {
+  height: calc(100vh - 48px);
+  overflow-y: scroll;
+}
+
+div.day {
+  background-color: rgb(230, 230, 230);
+
+  &.active {
+    background-color: white;
+
+    ul.waypoints {
+      li.waypoint {
+        div.num {
+          display: block;
+          text-align: right;
+          width: 1.5em;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+
+  ul.waypoints {
+    list-style-type: none;
+    margin: 0;
+
+    li.waypoint {
+      display: flex;
+      justify-content: space-between;
+
+      div.num {
+        display: none;
+      }
+
+      div.body {
+        flex-grow: 1;
+      }
+    }
+  }
+}

@@ -1,40 +1,26 @@
-<div id="<%= dom_id waypoint %>" class="scaffold_record">
-  <p>
-    <strong>Name:</strong>
-    <%= waypoint.name %>
-  </p>
+<li id="<%= dom_id waypoint %>" class="waypoint">
+  <div class="num">
+    <% if i == 0 %>
+      始
+    <% elsif i == size - 1 %>
+      終
+    <% else %>
+      <%= i + 1 %>
+    <% end %>
+  </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= waypoint.description %>
-  </p>
+  <div class="body">
+    <div>
+      <%= waypoint.name %>
+    </div>
+    <div>
+      <%= waypoint.description %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Longitude:</strong>
-    <%= waypoint.longitude %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= waypoint.latitude %>
-  </p>
-
-  <p>
-    <strong>Stop min:</strong>
-    <%= waypoint.stop_min %>
-  </p>
-
-  <p>
-    <strong>Index:</strong>
-    <%= waypoint.index %>
-  </p>
-
-  <p>
-    <strong>Day:</strong>
-    <%= waypoint.day_id %>
-  </p>
-
-  <p>
-    <%= link_to "Edit this waypoint", edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), target: '_top' %>
-  </p>
-</div>
+  <div class="buttons">
+    <%= link_to edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint) do %>
+      <span class="material-icons-outlined">edit</span>
+    <% end %>
+  </div>
+</li>
