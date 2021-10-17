@@ -24,7 +24,7 @@ class DaysController < ApplicationController
 
   # POST /days or /days.json
   def create
-    @day = Day.new(day_params)
+    @day = @trip.days.build(day_params)
 
     respond_to do |format|
       if @day.save
@@ -56,6 +56,26 @@ class DaysController < ApplicationController
     respond_to do |format|
       format.html { redirect_to trip_days_url(@trip), notice: 'Day was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def order_waypoints
+    src = params[:waypoints_order]
+    @from = @trip.days.find(src[:from][:day_id]) if src[:from]
+    @to = @trip.days.find(src[:to][:day_id]) if src[:to]
+
+    if @from
+      waypoints = src[:from][:waypoints].map(&:to_i)
+      moved = @from.waypoints.reject { |w| waypoints.include?(w.id) }
+      moved.each { |w| @to.waypoints << w }
+
+      waypoints.each_with_index do |id, i|
+        @from.waypoints.find { |w| w.id == id }.update(index: i)
+      end
+    end
+
+    src[:to][:waypoints].map(&:to_i).each_with_index do |id, i|
+      @to.waypoints.find { |w| w.id == id }.update(index: i)
     end
   end
 

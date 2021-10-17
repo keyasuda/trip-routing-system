@@ -15,117 +15,172 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/days', type: :request do
-  # Day. As you add validations to Day, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
-  }
-
-  let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
-  }
-
   describe 'GET /index' do
     it 'renders a successful response' do
-      Day.create! valid_attributes
-      get days_url
+      day = FactoryBot.create(:day)
+      get trip_days_url(day.trip)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      day = Day.create! valid_attributes
-      get day_url(day)
+      day = FactoryBot.create(:unoptimized_day)
+      VCR.use_cassette 'valhalla_route' do
+        get trip_day_url(day.trip, day)
+      end
       expect(response).to be_successful
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_day_url
+      trip = FactoryBot.create(:trip)
+      get new_trip_day_url(trip)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      day = Day.create! valid_attributes
-      get edit_day_url(day)
+      day = FactoryBot.create(:day)
+      get edit_trip_day_url(day.trip, day)
       expect(response).to be_successful
     end
   end
 
   describe 'POST /create' do
+    let!(:trip) { FactoryBot.create(:trip) }
+
     context 'with valid parameters' do
+      let(:attributes) { FactoryBot.attributes_for(:day) }
+
       it 'creates a new Day' do
         expect {
-          post days_url, params: { day: valid_attributes }
-        }.to change(Day, :count).by(1)
+          post trip_days_url(trip), params: { day: attributes }
+        }.to change(trip.days, :count).by(1)
       end
 
       it 'redirects to the created day' do
-        post days_url, params: { day: valid_attributes }
-        expect(response).to redirect_to(day_url(Day.last))
+        post trip_days_url(trip), params: { day: attributes }
+        expect(response).to redirect_to(trip_day_url(trip, Day.last))
       end
     end
 
     context 'with invalid parameters' do
+      let(:invalid_attributes) { { name: '' } }
+
       it 'does not create a new Day' do
         expect {
-          post days_url, params: { day: invalid_attributes }
+          post trip_days_url(trip), params: { day: invalid_attributes }
         }.to change(Day, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post days_url, params: { day: invalid_attributes }
-        expect(response).to be_successful
+        post trip_days_url(trip), params: { day: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe 'PATCH /update' do
+    let(:day) { FactoryBot.create(:day) }
+
     context 'with valid parameters' do
       let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
+        { name: 'new name' }
       }
 
-      it 'updates the requested day' do
-        day = Day.create! valid_attributes
-        patch day_url(day), params: { day: new_attributes }
+      before do
+        patch trip_day_url(day.trip, day), params: { day: new_attributes }
         day.reload
-        skip('Add assertions for updated state')
+      end
+
+      it 'updates the requested day' do
+        expect(day.name).to eq new_attributes[:name]
       end
 
       it 'redirects to the day' do
-        day = Day.create! valid_attributes
-        patch day_url(day), params: { day: new_attributes }
-        day.reload
-        expect(response).to redirect_to(day_url(day))
+        expect(response).to redirect_to(trip_day_url(day.trip, day))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        day = Day.create! valid_attributes
-        patch day_url(day), params: { day: invalid_attributes }
-        expect(response).to be_successful
+        patch trip_day_url(day.trip, day), params: { day: { name: '' } }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe 'DELETE /destroy' do
+    let!(:day) { FactoryBot.create(:day) }
+
     it 'destroys the requested day' do
-      day = Day.create! valid_attributes
       expect {
-        delete day_url(day)
+        delete trip_day_url(day.trip, day)
       }.to change(Day, :count).by(-1)
     end
 
     it 'redirects to the days list' do
-      day = Day.create! valid_attributes
-      delete day_url(day)
-      expect(response).to redirect_to(days_url)
+      delete trip_day_url(day.trip, day)
+      expect(response).to redirect_to(trip_days_url(day.trip))
+    end
+  end
+
+  describe 'POST /order_waypoints' do
+    let(:day1) { FactoryBot.create(:day) }
+    let(:day2) { FactoryBot.create(:day, trip: day1.trip) }
+
+    describe 'in single day' do
+      let(:waypoints) { day1.waypoints.map(&:id).shuffle }
+
+      it 'set order of waypoints' do
+        post order_waypoints_trip_day_url(day1.trip, day1),
+             params: {
+               waypoints_order: {
+                 to: {
+                   day_id: day1.id,
+                   waypoints: waypoints,
+                 },
+               },
+             }
+
+        actual = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        expect(actual).to eq waypoints
+      end
+    end
+
+    describe 'in two days' do
+      before do
+        @waypoints1 = day1.waypoints.map(&:id)
+        moved = @waypoints1.pop
+        @waypoints2 = day2.waypoints.map(&:id) + [moved]
+
+        post order_waypoints_trip_day_url(day1.trip, day1),
+             params: {
+               waypoints_order: {
+                 from: {
+                   day_id: day1.id,
+                   waypoints: @waypoints1,
+                 },
+                 to: {
+                   day_id: day2.id,
+                   waypoints: @waypoints2,
+                 },
+               },
+             }
+      end
+
+      it 'set order of waypoints1' do
+        actual1 = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        expect(actual1).to eq @waypoints1
+      end
+
+      it 'set order of waypoints2' do
+        actual2 = day2.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        expect(actual2).to eq @waypoints2
+      end
     end
   end
 end

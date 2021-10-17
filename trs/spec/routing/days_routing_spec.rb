@@ -35,5 +35,9 @@ RSpec.describe DaysController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/trips/1/days/1').to route_to('days#destroy', id: '1', trip_id: '1')
     end
+
+    it 'routes to #order_waypoints' do
+      expect(post: '/trips/1/days/2/order_waypoints').to route_to('days#order_waypoints', trip_id: '1', id: '2')
+    end
   end
 end
