@@ -22,14 +22,16 @@
 
 <div id="notice"><%= notice %></div>
 
-<div
-  class="container"
-  data-controller="days"
-  data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
-  data-days-routes-value="<%= @day.routes.to_json %>">
+<div class="container">
   <div class="columns">
     <div class="column col-9">
-      <div data-days-target="map"></div>
+      <%= turbo_frame_tag "map" do %>
+        <div
+          data-controller="days"
+          data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
+          data-days-routes-value="<%= @day.routes.to_json %>"
+          data-days-target="map"></div>
+      <% end %>
     </div>
 
     <div class="column col-3 days">
@@ -40,14 +42,17 @@
             <div class="card-subtitle text-gray"><%= day.description %></div>
           </div>
           <div class="card-body">
-            <ul class="waypoints">
-              <% day.ordered_waypoints.each_with_index do |w, i| %>
-                <%= render partial: 'waypoints/waypoint', locals: {waypoint: w, i: i, size: day.waypoints.size} %>
-              <% end %>
-            </ul>
+            <%= turbo_frame_tag "waypoints_#{day.id}" do %>
+              <%= render partial: 'waypoints', locals: {day: day} %>
+            <% end %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
+
 </div>
+
+<%= form_with(url: order_waypoints_trip_day_path(@trip, @day), id: 'waypoints-order-form') do |form| %>
+  <%= hidden_field_tag :waypoints_order %>
+<% end %>

@@ -3,6 +3,9 @@
 
 import { application } from "./application"
 
+import DayWaypointsController from "./day_waypoints_controller"
+application.register("day-waypoints", DayWaypointsController)
+
 import DaysController from "./days_controller"
 application.register("days", DaysController)
 

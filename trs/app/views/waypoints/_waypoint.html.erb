@@ -1,4 +1,8 @@
-<li id="<%= dom_id waypoint %>" class="waypoint">
+<li id="<%= dom_id waypoint %>" class="waypoint" data-id="<%= waypoint.id %>">
+  <div class="handle">
+    <span class="material-icons-outlined">drag_handle</span>
+  </div>
+
   <div class="num">
     <% if i == 0 %>
       始

@@ -1,0 +1,9 @@
+<ul class="waypoints"
+  data-id="<%= day.id %>"
+  data-controller="day-waypoints"
+  data-day-waypoints-target="list"
+  id="waypoints_<%= day.id %>">
+  <% day.ordered_waypoints.each_with_index do |w, i| %>
+    <%= render partial: 'waypoints/waypoint', locals: {waypoint: w, i: i, size: day.waypoints.size} %>
+  <% end %>
+</ul>

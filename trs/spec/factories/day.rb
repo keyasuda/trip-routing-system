@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:name) { |i| "name #{i}" }
     sequence(:description) { |i| "description #{i}" }
     waypoints { FactoryBot.build_list(:waypoint, 10, day: nil) }
+    trip
   end
 
   factory :unoptimized_day, class: 'Day' do

@@ -57,8 +57,4 @@ export default class extends Controller {
       }).addTo(map)
     })
   }
-
-  reset() {
-    this.map.setView([35, 135], 16)
-  }
 }

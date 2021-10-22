@@ -12,6 +12,7 @@
     "leaflet-extra-markers": "^1.2.1",
     "material-icons": "^1.9.1",
     "polyline-encoded": "^0.0.9",
+    "sortablejs": "^1.14.0",
     "spectre.css": "^0.5.9"
   }
 }

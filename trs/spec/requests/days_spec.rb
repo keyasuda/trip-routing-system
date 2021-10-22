@@ -129,26 +129,30 @@ RSpec.describe '/days', type: :request do
   end
 
   describe 'POST /order_waypoints' do
-    let(:day1) { FactoryBot.create(:day) }
+    let(:day1) { FactoryBot.create(:unoptimized_day) }
     let(:day2) { FactoryBot.create(:day, trip: day1.trip) }
 
     describe 'in single day' do
-      let(:waypoints) { day1.waypoints.map(&:id).shuffle }
+      let(:waypoints) { day1.waypoints.map(&:id).reverse }
 
+      # rubocop:disable RSpec/ExampleLength
       it 'set order of waypoints' do
-        post order_waypoints_trip_day_url(day1.trip, day1),
-             params: {
-               waypoints_order: {
-                 to: {
-                   day_id: day1.id,
-                   waypoints: waypoints,
-                 },
-               },
-             }
+        VCR.use_cassette 'valhalla_reordered_route' do
+          post order_waypoints_trip_day_url(day1.trip, day1),
+               params: {
+                 waypoints_order: {
+                   to: {
+                     day_id: day1.id,
+                     waypoints: waypoints,
+                   },
+                 }.to_json,
+               }
+        end
 
         actual = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
         expect(actual).to eq waypoints
       end
+      # rubocop:enable RSpec/ExampleLength
     end
 
     describe 'in two days' do
@@ -168,7 +172,7 @@ RSpec.describe '/days', type: :request do
                    day_id: day2.id,
                    waypoints: @waypoints2,
                  },
-               },
+               }.to_json,
              }
       end
 

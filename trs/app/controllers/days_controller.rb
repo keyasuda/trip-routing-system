@@ -2,7 +2,7 @@
 
 class DaysController < ApplicationController
   before_action :set_trip
-  before_action :set_day, only: %i[show edit update destroy]
+  before_action :set_day, only: %i[show edit update destroy order_waypoints]
 
   # GET /days or /days.json
   def index
@@ -60,12 +60,12 @@ class DaysController < ApplicationController
   end
 
   def order_waypoints
-    src = params[:waypoints_order]
-    @from = @trip.days.find(src[:from][:day_id]) if src[:from]
-    @to = @trip.days.find(src[:to][:day_id]) if src[:to]
+    src = JSON.parse(params[:waypoints_order])
+    @from = @trip.days.find(src['from']['day_id']) if src['from']
+    @to = @trip.days.find(src['to']['day_id']) if src['to']
 
     if @from
-      waypoints = src[:from][:waypoints].map(&:to_i)
+      waypoints = src['from']['waypoints'].map(&:to_i)
       moved = @from.waypoints.reject { |w| waypoints.include?(w.id) }
       moved.each { |w| @to.waypoints << w }
 
@@ -74,8 +74,14 @@ class DaysController < ApplicationController
       end
     end
 
-    src[:to][:waypoints].map(&:to_i).each_with_index do |id, i|
+    src['to']['waypoints'].map(&:to_i).each_with_index do |id, i|
       @to.waypoints.find { |w| w.id == id }.update(index: i)
+    end
+
+    if @from
+      redirect_to [@trip, @day]
+    else
+      render layout: false, content_type: 'text/vnd.turbo-stream.html'
     end
   end
 
