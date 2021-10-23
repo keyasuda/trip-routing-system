@@ -59,6 +59,7 @@ class DaysController < ApplicationController
     end
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def order_waypoints
     src = JSON.parse(params[:waypoints_order])
     @from = @trip.days.find(src['from']['day_id']) if src['from']
@@ -84,6 +85,7 @@ class DaysController < ApplicationController
       render layout: false, content_type: 'text/vnd.turbo-stream.html'
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   private
 
