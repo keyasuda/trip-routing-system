@@ -39,5 +39,9 @@ RSpec.describe DaysController, type: :routing do
     it 'routes to #order_waypoints' do
       expect(post: '/trips/1/days/2/order_waypoints').to route_to('days#order_waypoints', trip_id: '1', id: '2')
     end
+
+    it 'routes to #optimize_waypoints' do
+      expect(post: '/trips/1/days/2/optimize_waypoints').to route_to('days#optimize_waypoints', trip_id: '1', id: '2')
+    end
   end
 end

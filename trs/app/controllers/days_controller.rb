@@ -2,7 +2,7 @@
 
 class DaysController < ApplicationController
   before_action :set_trip
-  before_action :set_day, only: %i[show edit update destroy order_waypoints]
+  before_action :set_day, only: %i[show edit update destroy order_waypoints optimize_waypoints]
 
   # GET /days or /days.json
   def index
@@ -86,6 +86,12 @@ class DaysController < ApplicationController
     end
   end
   # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+  def optimize_waypoints
+    @day.optimize!
+    @to = @day
+    render :order_waypoints, layout: false, content_type: 'text/vnd.turbo-stream.html'
+  end
 
   private
 

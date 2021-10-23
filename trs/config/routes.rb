@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :waypoints
       member do
         post 'order_waypoints'
+        post 'optimize_waypoints'
       end
     end
   end
