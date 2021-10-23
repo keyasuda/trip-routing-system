@@ -27,10 +27,10 @@
     <div class="column col-9">
       <%= turbo_frame_tag "map" do %>
         <div
-          data-controller="days"
-          data-days-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
-          data-days-routes-value="<%= @day.routes.to_json %>"
-          data-days-target="map"></div>
+          data-controller="day-map"
+          data-day-map-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
+          data-day-map-routes-value="<%= @day.routes.to_json %>"
+          data-day-map-target="map"></div>
       <% end %>
     </div>
 
