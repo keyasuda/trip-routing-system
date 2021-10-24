@@ -4,6 +4,7 @@ volumes:
   osm-pgdata:
   osm-tiles:
   valhalla_tiles:
+  nominatim-data:
 
 services:
   openstreetmap-tile-server:
@@ -26,3 +27,16 @@ services:
       - type: bind
         source: "./osm-data/japan-latest.osm.pbf"
         target: "/data.osm.pbf"
+
+  nominatim:
+    image: mediagis/nominatim:3.7
+    environment:
+      - PBF_PATH=/nominatim/data.osm.pbf
+      - REPLICATION_URL=https://download.geofabrik.de/asia/japan-updates/
+    ports:
+      - "8003:8080"
+    volumes:
+      - "nominatim-data:/var/lib/postgresql/12/main"
+      - type: bind
+        source: "./osm-data/japan-latest.osm.pbf"
+        target: "/nominatim/data.osm.pbf"
