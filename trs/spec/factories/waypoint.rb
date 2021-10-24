@@ -8,6 +8,7 @@ FactoryBot.define do
     sequence(:latitude) { |i| i }
     sequence(:stop_min) { |i| i }
     sequence(:index) { |i| i }
+    day
   end
 
   factory :waypoint0, class: 'Waypoint' do

@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :trips do
     resources :days do
-      resources :waypoints
+      resources :waypoints, only: %i[create edit update destroy]
       member do
         post 'order_waypoints'
         post 'optimize_waypoints'

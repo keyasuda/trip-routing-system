@@ -15,43 +15,21 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/waypoints', type: :request do
-  # Waypoint. As you add validations to Waypoint, be sure to
-  # adjust the attributes here as well.
+  let!(:waypoint) { FactoryBot.create(:waypoint) }
+  let(:day) { waypoint.day }
+  let(:trip) { day.trip }
+
   let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
+    FactoryBot.attributes_for(:waypoint)
   }
 
   let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
+    { name: '' }
   }
-
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Waypoint.create! valid_attributes
-      get waypoints_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      waypoint = Waypoint.create! valid_attributes
-      get waypoint_url(waypoint)
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /new' do
-    it 'renders a successful response' do
-      get new_waypoint_url
-      expect(response).to be_successful
-    end
-  end
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      waypoint = Waypoint.create! valid_attributes
-      get edit_waypoint_url(waypoint)
+      get edit_trip_day_waypoint_url(trip, day, waypoint)
       expect(response).to be_successful
     end
   end
@@ -60,26 +38,26 @@ RSpec.describe '/waypoints', type: :request do
     context 'with valid parameters' do
       it 'creates a new Waypoint' do
         expect {
-          post waypoints_url, params: { waypoint: valid_attributes }
-        }.to change(Waypoint, :count).by(1)
+          post trip_day_waypoints_url(trip, day), params: { waypoint: valid_attributes }
+        }.to change(day.waypoints, :count).by(1)
       end
 
       it 'redirects to the created waypoint' do
-        post waypoints_url, params: { waypoint: valid_attributes }
-        expect(response).to redirect_to(waypoint_url(Waypoint.last))
+        post trip_day_waypoints_url(trip, day), params: { waypoint: valid_attributes }
+        expect(response).to redirect_to(trip_day_url(trip, day))
       end
     end
 
     context 'with invalid parameters' do
       it 'does not create a new Waypoint' do
         expect {
-          post waypoints_url, params: { waypoint: invalid_attributes }
-        }.to change(Waypoint, :count).by(0)
+          post trip_day_waypoints_url(trip, day), params: { waypoint: invalid_attributes }
+        }.to change(day.waypoints, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post waypoints_url, params: { waypoint: invalid_attributes }
-        expect(response).to be_successful
+        post trip_day_waypoints_url(trip, day), params: { waypoint: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -87,45 +65,40 @@ RSpec.describe '/waypoints', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
+        { name: 'new name' }
       }
 
       it 'updates the requested waypoint' do
-        waypoint = Waypoint.create! valid_attributes
-        patch waypoint_url(waypoint), params: { waypoint: new_attributes }
+        patch trip_day_waypoint_url(trip, day, waypoint), params: { waypoint: new_attributes }
         waypoint.reload
-        skip('Add assertions for updated state')
+        expect(waypoint.name).to eq new_attributes[:name]
       end
 
       it 'redirects to the waypoint' do
-        waypoint = Waypoint.create! valid_attributes
-        patch waypoint_url(waypoint), params: { waypoint: new_attributes }
+        patch trip_day_waypoint_url(trip, day, waypoint), params: { waypoint: new_attributes }
         waypoint.reload
-        expect(response).to redirect_to(waypoint_url(waypoint))
+        expect(response).to redirect_to(trip_day_url(trip, day))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        waypoint = Waypoint.create! valid_attributes
-        patch waypoint_url(waypoint), params: { waypoint: invalid_attributes }
-        expect(response).to be_successful
+        patch trip_day_waypoint_url(trip, day, waypoint), params: { waypoint: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested waypoint' do
-      waypoint = Waypoint.create! valid_attributes
       expect {
-        delete waypoint_url(waypoint)
-      }.to change(Waypoint, :count).by(-1)
+        delete trip_day_waypoint_url(trip, day, waypoint)
+      }.to change(day.waypoints, :count).by(-1)
     end
 
     it 'redirects to the waypoints list' do
-      waypoint = Waypoint.create! valid_attributes
-      delete waypoint_url(waypoint)
-      expect(response).to redirect_to(waypoints_url)
+      delete trip_day_waypoint_url(trip, day, waypoint)
+      expect(response).to redirect_to(trip_day_url(trip, day))
     end
   end
 end

@@ -5,15 +5,15 @@ require 'rails_helper'
 RSpec.describe WaypointsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
-      expect(get: '/trips/3/days/2/waypoints').to route_to('waypoints#index', trip_id: '3', day_id: '2')
+      expect(get: '/trips/3/days/2/waypoints').not_to route_to('waypoints#index', trip_id: '3', day_id: '2')
     end
 
     it 'routes to #new' do
-      expect(get: '/trips/3/days/2/waypoints/new').to route_to('waypoints#new', trip_id: '3', day_id: '2')
+      expect(get: '/trips/3/days/2/waypoints/new').not_to route_to('waypoints#new', trip_id: '3', day_id: '2')
     end
 
     it 'routes to #show' do
-      expect(get: '/trips/3/days/2/waypoints/1').to route_to('waypoints#show', id: '1', trip_id: '3', day_id: '2')
+      expect(get: '/trips/3/days/2/waypoints/1').not_to route_to('waypoints#show', id: '1', trip_id: '3', day_id: '2')
     end
 
     it 'routes to #edit' do
