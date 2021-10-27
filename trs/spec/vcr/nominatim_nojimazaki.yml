@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8003/search?q=%E9%87%8E%E5%B3%B6%E5%9F%BC%E7%81%AF%E5%8F%B0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 27 Oct 2021 13:37:37 GMT
+      Server:
+      - Apache/2.4.41 (Ubuntu)
+      Content-Location:
+      - search.php
+      Vary:
+      - negotiate
+      Tcn:
+      - choice
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET
+      Content-Length:
+      - '454'
+      Content-Type:
+      - application/json; charset=UTF-8
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3sicGxhY2VfaWQiOjcxMDU5NTQsImxpY2VuY2UiOiJEYXRhIMKpIE9wZW5TdHJlZXRNYXAgY29udHJpYnV0b3JzLCBPRGJMIDEuMC4gaHR0cHM6Ly9vc20ub3JnL2NvcHlyaWdodCIsIm9zbV90eXBlIjoid2F5Iiwib3NtX2lkIjo0NTY4NTExMzksImJvdW5kaW5nYm94IjpbIjM0LjkwMTY5OCIsIjM0LjkwMTc2MzkiLCIxMzkuODg4MzQ1NCIsIjEzOS44ODg0MjU0Il0sImxhdCI6IjM0LjkwMTcyOTUiLCJsb24iOiIxMzkuODg4Mzg1MjQ1NjEzODgiLCJkaXNwbGF5X25hbWUiOiLph47ls7bln7znga/lj7AsIOWbvemBkzQxMOWPtywg55m95rWc55S655m95rWcLCDljZfmiL/nt4/luIIsIOWNg+iRieecjCwgMjk1MDEwMiwg5pel5pysIiwicGxhY2VfcmFuayI6MzAsImNhdGVnb3J5IjoibWFuX21hZGUiLCJ0eXBlIjoibGlnaHRob3VzZSIsImltcG9ydGFuY2UiOjAuMTExMDAwMDAwMDAwMDAwMDJ9XQ==
+  recorded_at: Wed, 27 Oct 2021 13:37:37 GMT
+recorded_with: VCR 6.0.0

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :trips do
     resources :days do
       resources :waypoints, only: %i[create edit update destroy]
+      get 'waypoints/search_poi' => 'waypoints#search_poi'
+
       member do
         post 'order_waypoints'
         post 'optimize_waypoints'

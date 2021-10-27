@@ -7,7 +7,7 @@ export default class extends Controller {
 
   connect() {
     const map = init(this.mapTarget)
-    this.map = map
+    window.map = map
 
     const lat = this.latitudeTarget.value
     const lng = this.longitudeTarget.value

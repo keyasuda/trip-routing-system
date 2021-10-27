@@ -59,6 +59,11 @@ class WaypointsController < ApplicationController
     end
   end
 
+  def search_poi
+    @pois = Waypoint.search_poi(params[:q])
+    render layout: false, content_type: 'text/vnd.turbo-stream.html'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

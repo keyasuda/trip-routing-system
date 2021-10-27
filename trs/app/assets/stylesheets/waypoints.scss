@@ -17,3 +17,19 @@ form.waypoint {
     width: 4em;
   }
 }
+
+.pois-container {
+  height: calc(100vh - 48px);
+  overflow: auto;
+
+  ul.pois {
+    list-style-type: none;
+    margin: 0;
+
+    li {
+      border-bottom: 1px solid rgb(170, 170, 170);
+      cursor: pointer;
+      padding-bottom: 10px;
+    }
+  }
+}

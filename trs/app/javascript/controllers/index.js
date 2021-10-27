@@ -9,5 +9,8 @@ application.register("day-map", DayMapController)
 import DayWaypointsController from "./day_waypoints_controller"
 application.register("day-waypoints", DayWaypointsController)
 
+import PoiSearchController from "./poi_search_controller"
+application.register("poi-search", PoiSearchController)
+
 import WaypointsController from "./waypoints_controller"
 application.register("waypoints", WaypointsController)

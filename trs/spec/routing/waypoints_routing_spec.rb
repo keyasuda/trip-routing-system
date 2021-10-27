@@ -35,5 +35,9 @@ RSpec.describe WaypointsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/trips/3/days/2/waypoints/1').to route_to('waypoints#destroy', id: '1', trip_id: '3', day_id: '2')
     end
+
+    it 'routes to #search_poi' do
+      expect(get: '/trips/3/days/2/waypoints/search_poi').to route_to('waypoints#search_poi', trip_id: '3', day_id: '2')
+    end
   end
 end
