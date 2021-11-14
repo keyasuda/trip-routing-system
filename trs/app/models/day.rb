@@ -11,7 +11,7 @@ class Day < ApplicationRecord
   end
 
   def routes(costing = 'auto')
-    result = call_valhalla_api('route', costing)
+    result = @routes ||= call_valhalla_api('route', costing)
 
     result['trip']['legs']
   end

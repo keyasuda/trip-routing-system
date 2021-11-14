@@ -33,9 +33,12 @@ div.day {
 
     li.waypoint {
       border-bottom: 1px solid rgb(170, 170, 170);
-      display: flex;
-      justify-content: space-between;
       padding-bottom: 10px;
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+      }
 
       &.selected {
         font-weight: bold;
@@ -68,6 +71,13 @@ div.day {
           display: block;
           height: 24px;
         }
+      }
+
+      div.eta,
+      div.etd {
+        font-size: 90%;
+        color: grey;
+        margin-left: 24px;
       }
     }
   }

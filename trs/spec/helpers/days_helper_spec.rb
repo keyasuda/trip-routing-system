@@ -2,16 +2,29 @@
 
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the DaysHelper. For example:
-#
-# describe DaysHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe DaysHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'eta output' do
+    subject do
+      VCR.use_cassette 'valhalla_route' do
+        helper.waypoint_eta(day, index)
+      end
+    end
+
+    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:index) { 3 }
+
+    describe 'mid waypoint' do
+      it 'returns the eta' do
+        is_expected.to eq 11_773.seconds.since(day.start_at)
+      end
+    end
+
+    describe 'first waypoint' do
+      let(:index) { 0 }
+
+      it 'returns Day#start_at' do
+        is_expected.to eq day.start_at
+      end
+    end
+  end
 end

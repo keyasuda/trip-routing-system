@@ -19,3 +19,6 @@ Metrics/AbcSize:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+RSpec/ImplicitSubject:
+  Enabled: false

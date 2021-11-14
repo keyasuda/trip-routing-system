@@ -11,6 +11,7 @@ FactoryBot.define do
   factory :unoptimized_day, class: 'Day' do
     name { 'unoptimized' }
     waypoints { (0..5).map { |i| FactoryBot.build(:"waypoint#{i}", day: nil) } }
+    start_at { '2021/03/01 10:00:00' }
     trip
   end
 end

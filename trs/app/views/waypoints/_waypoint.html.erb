@@ -1,30 +1,44 @@
 <li id="<%= dom_id waypoint %>" class="waypoint" data-id="<%= waypoint.id %>">
-  <div class="handle">
-    <span class="material-icons-outlined">drag_handle</span>
+  <% if waypoint.day == @day && i > 0 %>
+  <div class="eta">
+    <%= waypoint_eta(@day, i).strftime('%H:%M') %> 着
   </div>
+  <% end %>
 
-  <div class="num">
-    <% if i == 0 %>
+  <div class="content">
+    <div class="handle">
+      <span class="material-icons-outlined">drag_handle</span>
+    </div>
+
+    <div class="num">
+      <% if i == 0 %>
       始
-    <% elsif i == size - 1 %>
+      <% elsif i == size - 1 %>
       終
-    <% else %>
+      <% else %>
       <%= i + 1 %>
-    <% end %>
-  </div>
-
-  <div class="body">
-    <div>
-      <%= waypoint.name %>
+      <% end %>
     </div>
-    <div>
-      <%= waypoint.description %>
-    </div>
-  </div>
 
-  <div class="buttons">
-    <%= link_to edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), data: { turbo_frame: '_top' } do %>
+    <div class="body">
+      <div>
+        <%= waypoint.name %>
+      </div>
+      <div>
+        <%= waypoint.description %>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <%= link_to edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), data: { turbo_frame: '_top' } do %>
       <span class="material-icons-outlined">edit</span>
-    <% end %>
+      <% end %>
+    </div>
   </div>
+
+  <% if waypoint.day == @day && i < size - 1 %>
+  <div class="etd">
+    <%= (waypoint.stop_min || 0).minutes.since(waypoint_eta(@day, i)).strftime('%H:%M') %> 発
+  </div>
+  <% end %>
 </li>
