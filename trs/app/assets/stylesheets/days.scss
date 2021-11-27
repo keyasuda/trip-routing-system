@@ -82,3 +82,10 @@ div.day {
     }
   }
 }
+
+form.day {
+  padding: 10px;
+  .form-select {
+    width: auto;
+  }
+}
