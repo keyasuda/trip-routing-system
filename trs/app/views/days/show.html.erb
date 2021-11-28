@@ -20,7 +20,11 @@
   </section>
 </header>
 
-<div id="notice"><%= notice %></div>
+<% if notice %>
+  <div id="notice" class="toast" data-controller="toast" data-toast-target="autoclose">
+    <%= notice %>
+  </div>
+<% end %>
 
 <div class="container">
   <div class="columns">

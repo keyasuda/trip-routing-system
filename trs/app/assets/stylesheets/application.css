@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.toast {
+  bottom: 10px;
+  left: 10px;
+  position: fixed;
+  right: 10px;
+  width: auto !important;
+  z-index: 9000;
+}
