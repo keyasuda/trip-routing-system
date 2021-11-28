@@ -52,6 +52,13 @@
             <%= turbo_frame_tag "waypoints_#{day.id}" do %>
               <%= render partial: 'waypoints', locals: {day: day} %>
             <% end %>
+            <% if day == @day %>
+              <div class="add-waypoint">
+                <%= link_to new_trip_day_waypoint_path(@trip, @day), class: 'btn btn-link' do %>
+                  <span class="material-icons-outlined">add</span>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>

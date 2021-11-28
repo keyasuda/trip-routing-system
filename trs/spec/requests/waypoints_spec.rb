@@ -20,7 +20,7 @@ RSpec.describe '/waypoints', type: :request do
   let(:trip) { day.trip }
 
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:waypoint)
+    FactoryBot.attributes_for(:waypoint).tap { |a| a.delete(:index) }
   }
 
   let(:invalid_attributes) {
@@ -45,6 +45,12 @@ RSpec.describe '/waypoints', type: :request do
       it 'redirects to the created waypoint' do
         post trip_day_waypoints_url(trip, day), params: { waypoint: valid_attributes }
         expect(response).to redirect_to(trip_day_url(trip, day))
+      end
+
+      it 'creates a waypoint with index' do
+        post trip_day_waypoints_url(trip, day), params: { waypoint: valid_attributes }
+        day.waypoints.reload
+        expect(day.waypoints.last.index).to eq day.waypoints.size
       end
     end
 

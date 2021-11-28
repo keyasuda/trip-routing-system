@@ -25,6 +25,7 @@ class WaypointsController < ApplicationController
   # POST /waypoints or /waypoints.json
   def create
     @waypoint = @day.waypoints.build(waypoint_params)
+    @waypoint.index = @day.waypoints.size
 
     respond_to do |format|
       if @waypoint.save

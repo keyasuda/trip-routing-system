@@ -9,7 +9,7 @@ RSpec.describe WaypointsController, type: :routing do
     end
 
     it 'routes to #new' do
-      expect(get: '/trips/3/days/2/waypoints/new').not_to route_to('waypoints#new', trip_id: '3', day_id: '2')
+      expect(get: '/trips/3/days/2/waypoints/new').to route_to('waypoints#new', trip_id: '3', day_id: '2')
     end
 
     it 'routes to #show' do

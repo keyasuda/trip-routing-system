@@ -35,6 +35,7 @@ class Day < ApplicationRecord
     locations = ordered_waypoints.map do |w|
       { 'lat' => w.latitude, 'lon' => w.longitude }
     end
+
     payload = { 'locations' => locations, 'costing' => costing }
 
     ret = Faraday.get("http://localhost:8002/#{method}", { json: payload.to_json })

@@ -1,9 +1,20 @@
-<h1>New waypoint</h1>
+<header class="navbar">
+  <section class="navbar-section">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'TRS', '/' %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @trip.name, @trip %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @day.name, [@trip, @day] %>
+      </li>
+      <li class="breadcrumb-item">
+        New waypoint
+      </li>
+    </ul>
+  </section>
+</header>
 
 <%= render "form", trip: @trip, day: @day, waypoint: @waypoint %>
-
-<br>
-
-<div>
-  <%= link_to "Back to waypoints", trip_day_waypoints_path([@trip, @day]) %>
-</div>
