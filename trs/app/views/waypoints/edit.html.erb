@@ -18,3 +18,9 @@
 </header>
 
 <%= render "form", trip: @trip, day: @day, waypoint: @waypoint %>
+
+<div class="destroy-button">
+  <%= button_to trip_day_waypoint_path(@trip, @day, @waypoint), method: :delete, class: 'btn' do %>
+    <span class="material-icons-outlined">delete</span>
+  <% end %>
+</div>
