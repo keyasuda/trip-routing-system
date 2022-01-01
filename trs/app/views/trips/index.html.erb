@@ -1,9 +1,31 @@
-<p id="notice"><%= notice %></p>
+<header class="navbar">
+  <section class="navbar-section">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        TRS
+      </li>
+    </ul>
+  </section>
+</header>
 
-<h1>Trip</h1>
+<% if notice %>
+  <div id="notice" class="toast" data-controller="toast" data-toast-target="autoclose">
+    <%= notice %>
+  </div>
+<% end %>
 
-<div id="trips">
-  <%= render @trips %>
+<div class="container">
+  <ul>
+    <% @trips.each do |trip| %>
+      <li>
+        <%= link_to trip.name, trip %>
+        <%= trip.days.first.start_at.strftime('%Y-%m-%d') if trip.days.first&.start_at %> -
+        <%= trip.days.last.start_at.strftime('%Y-%m-%d') if trip.days.last&.start_at %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to new_trip_path, class: 'btn btn-link' do %>
+    <span class="material-icons-outlined">add</span>
+  <% end %>
 </div>
-
-<%= link_to "New trip", new_trip_path %>
