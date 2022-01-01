@@ -1,10 +1,37 @@
-<p id="notice"><%= notice %></p>
+<header class="navbar">
+  <section class="navbar-section">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'TRS', '/' %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @trip.name, @trip %>
+      </li>
+    </ul>
+  </section>
 
-<%= render @trip %>
+  <section class="navbar-section">
+    <%= link_to edit_trip_path(@trip), class: 'btn btn-link' do %>
+      <span class="material-icons-outlined">settings</span>
+    <% end %>
+  </section>
+</header>
 
-<div>
-  <%= link_to "Edit this trip", edit_trip_path(@trip) %> |
-  <%= link_to "Back to trips", trips_path %>
+<% if notice %>
+  <div id="notice" class="toast" data-controller="toast" data-toast-target="autoclose">
+    <%= notice %>
+  </div>
+<% end %>
 
-  <%= button_to "Destroy this trip", trip_path(@trip), method: :delete %>
+<div class="container">
+  <h1><%= @trip.name %></h1>
+  <p><%= @trip.description %></p>
+
+  <ol>
+    <% @trip.days.each do |day| %>
+      <li>
+        <%= link_to day.name, [@trip, day] %>
+      </li>
+    <% end %>
+  </ol>
 </div>
