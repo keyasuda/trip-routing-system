@@ -54,7 +54,7 @@ class DaysController < ApplicationController
   def destroy
     @day.destroy
     respond_to do |format|
-      format.html { redirect_to trip_days_url(@trip), notice: 'Day was successfully destroyed.' }
+      format.html { redirect_to @trip, notice: 'Day was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
