@@ -13,7 +13,7 @@ class Day < ApplicationRecord
   def routes(costing = 'auto')
     result = @routes ||= call_valhalla_api('route', costing)
 
-    result['trip']['legs']
+    result['trip']&.fetch('legs')
   end
 
   def optimize!(costing = 'auto')

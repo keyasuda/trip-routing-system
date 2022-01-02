@@ -1,9 +1,17 @@
-<h1>New day</h1>
+<header class="navbar">
+  <section class="navbar-section">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'TRS', '/' %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @trip.name, @trip %>
+      </li>
+      <li class="breadcrumb-item">
+        新規追加
+      </li>
+    </ul>
+  </section>
+</header>
 
 <%= render "form", trip: @trip, day: @day %>
-
-<br>
-
-<div>
-  <%= link_to "Back to days", trip_days_path %>
-</div>
