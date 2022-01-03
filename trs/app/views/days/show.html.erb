@@ -38,9 +38,14 @@
       <% end %>
     </div>
 
-    <div class="column col-3 days">
+    <div
+      class="column col-3 days"
+      data-controller="days"
+      data-days-target="container">
       <% @trip.days.each do |day| %>
-        <div class="card <%= 'active' if day == @day %> day">
+        <div
+          class="card <%= 'active' if day == @day %> day"
+          <% if day == @day %>data-days-target="target"<% end %>>
           <div class="card-header">
             <%= button_to optimize_waypoints_trip_day_path(@trip, @day), class: 'btn float-right' do %>
               <span class="material-icons-outlined">auto_fix_normal</span>
