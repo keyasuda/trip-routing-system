@@ -23,20 +23,15 @@
   </div>
 <% end %>
 
-<div class="container">
+<div class="trip container">
   <h1><%= @trip.name %></h1>
   <p><%= @trip.description %></p>
 
   <table class="table table-striped table-hover">
-    <tr>
-      <th></th>
-      <th>日付</th>
-    </tr>
-
     <% @trip.days.each do |day| %>
       <tr>
-        <td><%= link_to day.name, [@trip, day] %></td>
         <td><%= day.start_at.strftime('%Y-%m-%d') if day.start_at %></td>
+        <td><%= link_to day.name, [@trip, day] %></td>
       </tr>
     <% end %>
   </table>

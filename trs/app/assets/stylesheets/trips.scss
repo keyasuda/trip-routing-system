@@ -1,3 +1,21 @@
+.trips {
+  table tr {
+    td:first-child {
+      text-align: right;
+      width: 14em;
+    }
+  }
+}
+
+.trip {
+  table tr {
+    td:first-child {
+      text-align: right;
+      width: 10em;
+    }
+  }
+}
+
 form.trip {
   padding: 10px;
   .form-select {
