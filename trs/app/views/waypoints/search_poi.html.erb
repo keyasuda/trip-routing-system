@@ -3,8 +3,8 @@
     <% @pois.each do |poi| %>
       <li
         data-poi-search-target="poi"
-        data-lat="<%= poi['lat'] %>"
-        data-lon="<%= poi['lon'] %>"><%= poi['display_name'] %></li>
+        data-lat="<%= poi[:lat] %>"
+        data-lon="<%= poi[:lon] %>"><%= poi[:display_name] %></li>
     <% end %>
   </ul>
 <% end %>

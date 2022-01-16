@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8003/search?q=%E8%A5%BF%E8%84%87%E5%B8%82%E3%80%81%E5%85%B5%E5%BA%AB%E7%9C%8C
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 15 Jan 2022 15:12:56 GMT
+      Server:
+      - Apache/2.4.41 (Ubuntu)
+      Content-Location:
+      - search.php
+      Vary:
+      - negotiate
+      Tcn:
+      - choice
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET
+      Content-Length:
+      - '819'
+      Content-Type:
+      - application/json; charset=UTF-8
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3sicGxhY2VfaWQiOjg1MjMyNzAsImxpY2VuY2UiOiJEYXRhIMKpIE9wZW5TdHJlZXRNYXAgY29udHJpYnV0b3JzLCBPRGJMIDEuMC4gaHR0cHM6Ly9vc20ub3JnL2NvcHlyaWdodCIsIm9zbV90eXBlIjoicmVsYXRpb24iLCJvc21faWQiOjkwMDI2OCwiYm91bmRpbmdib3giOlsiMzQuOTUyODM2IiwiMzUuMDcyMzE1IiwiMTM0Ljg5MTc2NiIsIjEzNS4xMDA3NTgiXSwibGF0IjoiMzUuMDEyNTc1NSIsImxvbiI6IjEzNC45OTYyNjIiLCJkaXNwbGF5X25hbWUiOiLopb/ohIfluIIsIOWFteW6q+ecjCwg5pel5pysIiwicGxhY2VfcmFuayI6MTQsImNhdGVnb3J5IjoiYm91bmRhcnkiLCJ0eXBlIjoiYWRtaW5pc3RyYXRpdmUiLCJpbXBvcnRhbmNlIjowLjYyMDAwMDAwMDAwMDAwMDF9LHsicGxhY2VfaWQiOjEwMjA3NiwibGljZW5jZSI6IkRhdGEgwqkgT3BlblN0cmVldE1hcCBjb250cmlidXRvcnMsIE9EYkwgMS4wLiBodHRwczovL29zbS5vcmcvY29weXJpZ2h0Iiwib3NtX3R5cGUiOiJub2RlIiwib3NtX2lkIjoyNjcwNjQ5MzcsImJvdW5kaW5nYm94IjpbIjM0Ljk2NzA0MzIiLCIzNC45NzcwNDMyIiwiMTM0Ljk2Mzk5OTEiLCIxMzQuOTczOTk5MSJdLCJsYXQiOiIzNC45NzIwNDMyIiwibG9uIjoiMTM0Ljk2ODk5OTEiLCJkaXNwbGF5X25hbWUiOiLopb/ohIfluIIsIOmHjuadkemHjuadkeWBnOi7iuWgtOe3miwg6YeO5p2R55S6LCDopb/ohIfluIIsIOWFteW6q+ecjCwg5pel5pysIiwicGxhY2VfcmFuayI6MzAsImNhdGVnb3J5IjoicmFpbHdheSIsInR5cGUiOiJzdGF0aW9uIiwiaW1wb3J0YW5jZSI6MC4yMjEwMDAwMDAwMDAwMDAwM31d
+  recorded_at: Sat, 15 Jan 2022 15:12:56 GMT
+recorded_with: VCR 6.0.0

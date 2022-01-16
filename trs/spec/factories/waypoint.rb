@@ -56,4 +56,12 @@ FactoryBot.define do
     latitude { 34.80774284635084 }
     index { 5 }
   end
+
+  factory :heso, class: 'Waypoint' do
+    name { 'heso' }
+    longitude { 135 }
+    latitude { 35 }
+    index { 0 }
+    stop_min { 10 }
+  end
 end
