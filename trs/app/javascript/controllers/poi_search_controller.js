@@ -8,7 +8,9 @@ export default class extends Controller {
       const target = ev.target
       const lat = target.dataset.lat
       const lon = target.dataset.lon
+
       window.map.setView([lat, lon])
+      document.querySelector('#waypoint-name').value = target.innerText
     }
 
     Array.prototype.slice
