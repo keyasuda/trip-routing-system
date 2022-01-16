@@ -17,21 +17,21 @@ class Waypoint < ApplicationRecord
     if m
       # plus codeが与えられた場合
       olc = PlusCodes::OpenLocationCode.new
-      decoded_pluscode =
+      decoded =
         if m[2].blank?
           olc.decode(keyword)
         else
           # short code
           # reference locationの座標を得る
-          ref = self.call_nominatim(m[2]).first
+          ref = call_nominatim(m[2]).first
           full_code = olc.recover_nearest(m[1].strip, ref[:lat], ref[:lon])
           olc.decode(full_code)
         end
 
       [{
-        lat: decoded_pluscode.latitude_center,
-        lon: decoded_pluscode.longitude_center,
-        display_name: keyword,
+        lat: decoded.latitude_center,
+        lon: decoded.longitude_center,
+        display_name: get_display_name(decoded),
       }]
     else
       # それ以外
@@ -50,5 +50,10 @@ class Waypoint < ApplicationRecord
         display_name: r['display_name'],
       }
     }
+  end
+
+  def self.get_display_name(pos)
+    ret = Faraday.get("http://localhost:8003/reverse?lat=#{pos.latitude_center}&lon=#{pos.longitude_center}&format=json")
+    JSON.parse(ret.body)['display_name']
   end
 end

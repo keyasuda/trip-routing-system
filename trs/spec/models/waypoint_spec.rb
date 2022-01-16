@@ -24,10 +24,13 @@ RSpec.describe Waypoint, type: :model do
 
     describe 'plus codes decoding' do
       let(:code) { '8Q7Q2222+22' }
-      let(:heso) { { lat: 35.0000625, lon: 135.0000625, display_name: code } }
+      let(:heso) { { lat: 35.0000625, lon: 135.0000625, display_name: '日本のへそモニュメント, 西脇篠山線, 上比延町, 西脇市, 兵庫県, 日本' } }
 
       it 'decodes full codes' do
-        actual = described_class.search_poi(code)
+        actual =
+          VCR.use_cassette 'nominatim_nishiwaki' do
+            described_class.search_poi(code)
+          end
         expect(actual).to eq [heso]
       end
 
