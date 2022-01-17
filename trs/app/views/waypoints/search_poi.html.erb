@@ -4,7 +4,8 @@
       <li
         data-poi-search-target="poi"
         data-lat="<%= poi[:lat] %>"
-        data-lon="<%= poi[:lon] %>"><%= poi[:display_name] %></li>
+        data-lon="<%= poi[:lon] %>"
+        data-action="click->poi-search#select"><%= poi[:display_name] %></li>
     <% end %>
   </ul>
 <% end %>
