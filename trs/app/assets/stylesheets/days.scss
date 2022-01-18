@@ -64,13 +64,7 @@ div.day {
 
       div.buttons {
         display: flex;
-        flex-direction: column;
         justify-content: center;
-
-        a {
-          display: block;
-          height: 24px;
-        }
       }
 
       div.eta,

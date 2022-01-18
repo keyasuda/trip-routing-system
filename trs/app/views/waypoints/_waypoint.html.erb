@@ -30,7 +30,18 @@
     </div>
 
     <div class="buttons">
-      <%= link_to edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), data: { turbo_frame: '_top' } do %>
+      <%= form_with(model: [waypoint.day.trip, waypoint.day, Waypoint.new(waypoint.attributes)]) do |form| %>
+        <%= form.hidden_field :name, id: 'waypoint-name' %>
+        <%= form.hidden_field :description %>
+        <%= form.hidden_field :longitude, data: {waypoints_target: 'longitude'} %>
+        <%= form.hidden_field :latitude, data: {waypoints_target: 'latitude'} %>
+        <%= form.hidden_field :stop_min %>
+        <%= form.button(class: 'btn btn-link') do %>
+          <span class="material-icons-outlined">content_copy</span>
+        <% end %>
+      <% end %>
+
+      <%= link_to edit_trip_day_waypoint_path(waypoint.day.trip, waypoint.day, waypoint), data: { turbo_frame: '_top' }, class: 'btn btn-link' do %>
       <span class="material-icons-outlined">edit</span>
       <% end %>
     </div>
