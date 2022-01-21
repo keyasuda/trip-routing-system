@@ -8,11 +8,14 @@
 }
 
 .trip {
-  table tr {
-    td:first-child {
-      text-align: right;
-      width: 10em;
-    }
+  h2 {
+    margin-top: 10px;
+  }
+
+  .enroute {
+    border-left: 0.05rem dashed #dadee4;
+    margin: 5px;
+    padding: 5px;
   }
 }
 

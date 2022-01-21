@@ -27,4 +27,29 @@ RSpec.describe DaysHelper, type: :helper do
       end
     end
   end
+
+  describe 'enroute' do
+    subject do
+      VCR.use_cassette 'valhalla_route' do
+        helper.enroute(day, index)
+      end
+    end
+
+    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:index) { 3 }
+
+    describe 'mid waypoint' do
+      it 'returns the enroute info' do
+        is_expected.to eq ({ time: 22, distance: 28 }) # 22分, 28キロ
+      end
+    end
+
+    describe 'last waypoint' do
+      let(:index) { day.waypoints.count }
+
+      it 'returns nil' do
+        is_expected.to be_blank
+      end
+    end
+  end
 end

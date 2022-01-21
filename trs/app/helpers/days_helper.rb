@@ -8,4 +8,14 @@ module DaysHelper
 
     offset.seconds.since(day.start_at)
   end
+
+  def enroute(day, index)
+    return nil if day.routes[index].blank?
+
+    summary = day.routes[index]['summary']
+    t = summary['time'] / 60
+    d = summary['length']
+
+    { time: t.to_i, distance: d.to_i }
+  end
 end

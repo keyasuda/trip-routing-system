@@ -27,14 +27,45 @@
   <h1><%= @trip.name %></h1>
   <p><%= @trip.description %></p>
 
-  <table class="table table-striped table-hover">
-    <% @trip.days.each do |day| %>
-      <tr>
-        <td><%= day.start_at.strftime('%Y-%m-%d') if day.start_at %></td>
-        <td><%= link_to day.name, [@trip, day] %></td>
-      </tr>
+  <% @trip.days.each do |day| %>
+    <h2><%= day.start_at.strftime('%Y-%m-%d') if day.start_at %> <%= link_to day.name, [@trip, day] %></h2>
+
+    <% day.ordered_waypoints.each.with_index do |waypoint, i| %>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title h5">
+            <%= waypoint.name %>
+            <sub class="text-gray"><%= waypoint.plus_code %></sub>
+          </div>
+          <% unless i == 0 %>
+            <div class="card-subtitle text-gray">
+              <%= waypoint_eta(day, i).strftime('%H:%M') %> 着
+              <% if i < day.waypoints.size - 1 %>
+                <%= waypoint.stop_min %>分滞在
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <%= waypoint.description %>
+        </div>
+        <% if i < day.waypoints.size - 1 %>
+          <div class="card-footer">
+            <div class="card-subtitle text-gray">
+              <%= (waypoint.stop_min || 0).minutes.since(waypoint_eta(day, i)).strftime('%H:%M') %> 発
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <% if enroute(day, i) %>
+        <div class="enroute">
+          <%= enroute(day, i)[:time] %>分
+          <%= enroute(day, i)[:distance] %>km
+        </div>
+      <% end %>
     <% end %>
-  </table>
+  <% end %>
 
   <%= link_to new_trip_day_path(@trip), class: 'btn btn-link' do %>
     <span class="material-icons-outlined">add</span>
