@@ -124,7 +124,7 @@ RSpec.describe '/days', type: :request do
 
     it 'redirects to the days list' do
       delete trip_day_url(day.trip, day)
-      expect(response).to redirect_to(trip_days_url(day.trip))
+      expect(response).to redirect_to(trip_url(day.trip))
     end
   end
 
