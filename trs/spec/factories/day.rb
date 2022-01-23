@@ -14,4 +14,19 @@ FactoryBot.define do
     start_at { '2021/03/01 10:00:00' }
     trip
   end
+
+  factory :day20220101, class: 'Day' do
+    name { 'day20220101' }
+    start_at { '2022/01/01 10:00:00' }
+  end
+
+  factory :day20220102, class: 'Day' do
+    name { 'day20220102' }
+    start_at { '2022/01/02 10:00:00' }
+  end
+
+  factory :day20220103, class: 'Day' do
+    name { 'day20220103' }
+    start_at { '2022/01/03 10:00:00' }
+  end
 end

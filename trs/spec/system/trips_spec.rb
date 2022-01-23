@@ -4,7 +4,10 @@ require 'system_helper'
 # for debug with inspector/irb put page.driver.debug(binding)
 
 RSpec.describe 'trips', type: :system, vcr: false do
+  let(:existing_trips) { nil }
+
   before do
+    existing_trips
     visit '/'
   end
 
@@ -55,6 +58,44 @@ RSpec.describe 'trips', type: :system, vcr: false do
 
       it 'shows toast' do
         expect(page).to have_text('Trip was successfully destroyed.')
+      end
+    end
+  end
+
+  describe 'trip list' do
+    describe 'blank trip' do
+      let(:existing_trips) { FactoryBot.create(:blank_trip) }
+
+      it 'shows the name' do
+        expect(page).to have_text(existing_trips.name)
+      end
+    end
+
+    describe 'single day trip' do
+      let(:existing_trips) { FactoryBot.create(:single_day_trip) }
+
+      it'shows the name' do
+        expect(page).to have_text(existing_trips.name)
+      end
+
+      it 'shows 1st day date' do
+        expect(page).to have_text('2022-01-01 - 2022-01-01')
+      end
+    end
+
+    describe 'two days trip' do
+      let(:existing_trips) { FactoryBot.create(:two_days_trip) }
+
+      it 'shows 1st day date' do
+        expect(page).to have_text('2022-01-01 - 2022-01-02')
+      end
+    end
+
+    describe 'three days trip' do
+      let(:existing_trips) { FactoryBot.create(:three_days_trip) }
+
+      it 'shows 1st day date' do
+        expect(page).to have_text('2022-01-01 - 2022-01-03')
       end
     end
   end
