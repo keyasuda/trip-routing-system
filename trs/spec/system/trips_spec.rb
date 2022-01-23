@@ -64,7 +64,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
 
   describe 'trip list' do
     describe 'blank trip' do
-      let(:existing_trips) { FactoryBot.create(:blank_trip) }
+      let(:existing_trips) { FactoryBot.create(:trip) }
 
       it 'shows the name' do
         expect(page).to have_text(existing_trips.name)

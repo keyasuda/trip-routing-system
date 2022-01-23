@@ -35,7 +35,7 @@ RSpec.describe '/days', type: :request do
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      trip = FactoryBot.create(:trip)
+      trip = FactoryBot.create(:filled_trip)
       get new_trip_day_url(trip)
       expect(response).to be_successful
     end
@@ -50,7 +50,7 @@ RSpec.describe '/days', type: :request do
   end
 
   describe 'POST /create' do
-    let!(:trip) { FactoryBot.create(:trip) }
+    let!(:trip) { FactoryBot.create(:filled_trip) }
 
     context 'with valid parameters' do
       let(:attributes) { FactoryBot.attributes_for(:day) }

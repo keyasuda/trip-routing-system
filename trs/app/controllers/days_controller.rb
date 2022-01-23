@@ -15,7 +15,14 @@ class DaysController < ApplicationController
 
   # GET /days/new
   def new
-    @day = @trip.days.build
+    lastday = @trip.days.last
+    start_at =
+      if lastday&.start_at
+        1.day.since(lastday.start_at)
+      else
+        Time.zone.now
+      end
+    @day = @trip.days.build(start_at: start_at)
   end
 
   # GET /days/1/edit

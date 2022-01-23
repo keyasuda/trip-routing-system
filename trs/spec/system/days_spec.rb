@@ -5,7 +5,7 @@ require 'system_helper'
 
 RSpec.describe 'days', type: :system do
   describe 'new day' do
-    let(:trip) { FactoryBot.create(:blank_trip) }
+    let(:trip) { FactoryBot.create(:trip) }
     let(:name) { 'new day' }
     let(:description) { 'day description' }
 
@@ -82,5 +82,27 @@ RSpec.describe 'days', type: :system do
         expect(page.all('.active.day .waypoint .body div').map(&:text).join).to eq '014325'
       end
     end
+  end
+
+  describe 'additonal day' do
+    let(:day) { FactoryBot.create(:day20220101) }
+
+    before do
+      visit "/trips/#{day.trip.id}"
+      click_link 'add'
+    end
+
+    # rubocop:disable RSpec/ExampleLength
+    it 'shows the next date as default' do
+      y = page.find('#day_start_at_1i').value
+      m = page.find('#day_start_at_2i').value
+      d = page.find('#day_start_at_3i').value
+      h = page.find('#day_start_at_4i').value
+      i = page.find('#day_start_at_5i').value
+      actual = "#{y}-#{m}-#{d} #{h}:#{i}"
+
+      expect(actual).to eq '2022-1-2 10:00'
+    end
+    # rubocop:enable RSpec/ExampleLength
   end
 end

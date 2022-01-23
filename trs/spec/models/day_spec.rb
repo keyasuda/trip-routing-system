@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Day, type: :model do
   describe 'accessors for waypoints' do
     before do
-      @day = FactoryBot.create(:trip).days.first
+      @day = FactoryBot.create(:filled_trip).days.first
       @waypoints = @day.waypoints.shuffle
       @waypoints.each_with_index { |w, i| w.update(index: i) }
     end
