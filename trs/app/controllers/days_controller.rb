@@ -28,7 +28,7 @@ class DaysController < ApplicationController
 
     respond_to do |format|
       if @day.save
-        format.html { redirect_to [@trip, @day], notice: 'Day was successfully created.' }
+        format.html { redirect_to @trip, notice: 'Day was successfully created.' }
         format.json { render :show, status: :created, location: @day }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -29,6 +29,7 @@
 
   <% @trip.days.each do |day| %>
     <h2><%= day.start_at.strftime('%Y-%m-%d') if day.start_at %> <%= link_to day.name, [@trip, day] %></h2>
+    <p><%= day.description %></p>
 
     <% day.ordered_waypoints.each.with_index do |waypoint, i| %>
       <div class="card">

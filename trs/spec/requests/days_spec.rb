@@ -63,7 +63,7 @@ RSpec.describe '/days', type: :request do
 
       it 'redirects to the created day' do
         post trip_days_url(trip), params: { day: attributes }
-        expect(response).to redirect_to(trip_day_url(trip, Day.last))
+        expect(response).to redirect_to(trip)
       end
     end
 
