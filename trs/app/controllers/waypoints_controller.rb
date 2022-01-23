@@ -55,7 +55,7 @@ class WaypointsController < ApplicationController
   def destroy
     @waypoint.destroy
     respond_to do |format|
-      format.html { redirect_to trip_day_url(@trip, @day) }
+      format.html { redirect_to trip_day_url(@trip, @day), notice: 'Waypoint was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
