@@ -98,5 +98,20 @@ RSpec.describe 'trips', type: :system, vcr: false do
         expect(page).to have_text('2022-01-01 - 2022-01-03')
       end
     end
+
+    describe 'trip order' do
+      let(:trip1) { FactoryBot.create(:day20220101).trip }
+      let(:trip2) { FactoryBot.create(:day20220102).trip }
+      let(:trip3) { FactoryBot.create(:day20220103).trip }
+      let(:existing_trips) { [trip1, trip2, trip3] }
+
+      it 'shows 1/3 as a top' do
+        expect(page.all('tr').first).to have_text('2022-01-03')
+      end
+
+      it 'shows 1/1 as a bottom' do
+        expect(page.all('tr').last).to have_text('2022-01-01')
+      end
+    end
   end
 end

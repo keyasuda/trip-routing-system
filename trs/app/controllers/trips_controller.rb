@@ -5,7 +5,15 @@ class TripsController < ApplicationController
 
   # GET /trips or /trips.json
   def index
-    @trips = Trip.all
+    @trips =
+      Trip.
+      includes(:days).
+      order(
+        Arel.sql(
+          '(select start_at from days where days.trip_id=trips.id order by start_at limit 1) desc',
+        ),
+      ).
+      all
   end
 
   # GET /trips/1 or /trips/1.json
