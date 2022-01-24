@@ -20,44 +20,68 @@ RSpec.describe 'trips', type: :system, vcr: false do
 
       fill_in 'trip_name', with: name
       fill_in 'trip_description', with: description
-      click_button 'done'
     end
 
-    it 'shows toast' do
-      expect(page).to have_text('Trip was successfully created.')
+    it 'has a fixed page title' do
+      expect(page.title).to have_text('旅行の新規作成')
     end
 
-    it 'shows trip name' do
-      expect(page).to have_text(name)
-    end
-
-    it 'shows trip description' do
-      expect(page).to have_text(description)
-    end
-
-    describe 'modify the trip' do
-      let(:name) { 'modified trip' }
-
+    describe 'add' do
       before do
-        click_link 'settings'
-
-        fill_in 'trip_name', with: name
         click_button 'done'
-      end
-
-      it 'shows modified name' do
-        expect(page).to have_text(name)
-      end
-    end
-
-    describe 'destroy the trip' do
-      before do
-        click_link 'settings'
-        click_button 'delete'
+        sleep 1
       end
 
       it 'shows toast' do
-        expect(page).to have_text('Trip was successfully destroyed.')
+        expect(page).to have_text('Trip was successfully created.')
+      end
+
+      it 'shows trip name' do
+        expect(page).to have_text(name)
+      end
+
+      it 'shows trip name as a page title' do
+        expect(page.title).to have_text(name)
+      end
+
+      it 'shows trip description' do
+        expect(page).to have_text(description)
+      end
+
+      describe 'modify the trip' do
+        let(:new_name) { 'modified trip' }
+
+        before do
+          click_link 'settings'
+
+          fill_in 'trip_name', with: new_name
+          sleep 1
+        end
+
+        it 'shows current title as a page title' do
+          expect(page.title).to have_text(name)
+        end
+
+        describe 'after submit' do
+          before do
+            click_button 'done'
+          end
+
+          it 'shows modified name' do
+            expect(page).to have_text(new_name)
+          end
+        end
+      end
+
+      describe 'destroy the trip' do
+        before do
+          click_link 'settings'
+          click_button 'delete'
+        end
+
+        it 'shows toast' do
+          expect(page).to have_text('Trip was successfully destroyed.')
+        end
       end
     end
   end
