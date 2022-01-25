@@ -1,7 +1,7 @@
 <%= form_with(model: [trip, day], class: 'day') do |form| %>
   <% if day.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(day.errors.count, "error") %> prohibited this day from being saved:</h2>
+      <h2><%= t("errors.template.header", model: Day.model_name.human, count: day.errors.count) %></h2>
 
       <ul>
         <% day.errors.each do |error| %>

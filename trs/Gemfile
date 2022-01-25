@@ -75,3 +75,5 @@ gem 'faraday'
 gem 'jsbundling-rails'
 
 gem 'open-location-code', '~> 1.0'
+
+gem 'rails-i18n', '~> 7.0.0'

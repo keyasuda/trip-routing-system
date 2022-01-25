@@ -42,9 +42,9 @@
           </div>
           <% unless i == 0 %>
             <div class="card-subtitle text-gray">
-              <%= waypoint_eta(day, i).strftime('%H:%M') %> 着
+              <%= t('waypoints.waypoint.eta', time: l(waypoint_eta(day, i), format: :eta)) %>
               <% if i < day.waypoints.size - 1 %>
-                <%= waypoint.stop_min %>分滞在
+                <%= t('.stop_min', stop_min: waypoint.stop_min) %>
               <% end %>
             </div>
           <% end %>
@@ -55,7 +55,7 @@
         <% if i < day.waypoints.size - 1 %>
           <div class="card-footer">
             <div class="card-subtitle text-gray">
-              <%= (waypoint.stop_min || 0).minutes.since(waypoint_eta(day, i)).strftime('%H:%M') %> 発
+              <%= t('waypoints.waypoint.etd', time: l((waypoint.stop_min || 0).minutes.since(waypoint_eta(day, i)), format: :eta)) %>
             </div>
           </div>
         <% end %>
@@ -63,8 +63,7 @@
 
       <% if enroute(day, i) %>
         <div class="enroute">
-          <%= enroute(day, i)[:time] %>分
-          <%= enroute(day, i)[:distance] %>km
+          <%= t('.enroute', **enroute(day, i)) %>
         </div>
       <% end %>
     <% end %>

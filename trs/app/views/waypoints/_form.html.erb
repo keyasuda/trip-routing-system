@@ -21,7 +21,7 @@
       <%= form_with(model: [@trip, @day, @waypoint], class: 'form-horizontal waypoint') do |form| %>
         <% if @waypoint.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(waypoint.errors.count, "error") %> prohibited this waypoint from being saved:</h2>
+            <h2><%= t("errors.template.header", model: Waypoint.model_name.human, count: waypoint.errors.count) %></h2>
 
             <ul>
               <% @waypoint.errors.each do |error| %>

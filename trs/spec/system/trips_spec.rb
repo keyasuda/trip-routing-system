@@ -23,7 +23,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
     end
 
     it 'has a fixed page title' do
-      expect(page.title).to have_text('旅行の新規作成')
+      expect(page.title).to have_text(I18n.t('view.title.add', name: Trip.model_name.human))
     end
 
     describe 'add' do
@@ -33,7 +33,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
       end
 
       it 'shows toast' do
-        expect(page).to have_text('Trip was successfully created.')
+        expect(page).to have_text(I18n.t('view.toast.added', name: name))
       end
 
       it 'shows trip name' do
@@ -70,6 +70,10 @@ RSpec.describe 'trips', type: :system, vcr: false do
           it 'shows modified name' do
             expect(page).to have_text(new_name)
           end
+
+          it 'shows toast' do
+            expect(page).to have_text(I18n.t('view.toast.updated', name: new_name))
+          end
         end
       end
 
@@ -80,7 +84,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
         end
 
         it 'shows toast' do
-          expect(page).to have_text('Trip was successfully destroyed.')
+          expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
         end
       end
     end

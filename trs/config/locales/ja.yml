@@ -1,0 +1,41 @@
+ja:
+  activerecord:
+    models:
+      trip: 旅行
+      day: 日程
+      waypoint: スポット
+    attributes:
+      trip:
+        name: 名称
+        description: 説明
+      day:
+        name: 名称
+        description: 説明
+        start_at: 出発時刻
+      waypoint:
+        name: 名称
+        description: 説明
+        stop_min: 滞在時間(分)
+  trips:
+    show:
+      stop_min: '%{stop_min}分滞在'
+      enroute: '%{time}分 %{distance}km'
+  waypoints:
+    waypoint:
+      start: 始
+      end: 終
+      eta: '%{time} 着'
+      etd: '%{time} 発'
+  view:
+    title:
+      add: '%{name}の追加'
+      config: '%{name}の設定'
+      edit: '%{name}の編集'
+    toast:
+      added: '%{name}を追加しました。'
+      updated: '%{name}を更新しました。'
+      destroyed: '%{name}を削除しました。'
+
+  time:
+    formats:
+      eta: '%H:%M'

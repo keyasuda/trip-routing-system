@@ -1,4 +1,4 @@
-<% content_for(:title) { '旅行の新規作成' } %>
+<% content_for(:title) { t('view.title.add', name: Trip.model_name.human) } %>
 
 <header class="navbar">
   <section class="navbar-section">
@@ -7,7 +7,7 @@
         <%= link_to 'TRS', '/' %>
       </li>
       <li class="breadcrumb-item">
-        新規作成
+        <%= t('view.title.add', name: Trip.model_name.human) %>
       </li>
     </ul>
   </section>

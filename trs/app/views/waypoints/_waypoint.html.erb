@@ -1,7 +1,7 @@
 <li id="<%= dom_id waypoint %>" class="waypoint" data-id="<%= waypoint.id %>">
   <% if waypoint.day == @day && i > 0 %>
   <div class="eta">
-    <%= waypoint_eta(@day, i).strftime('%H:%M') %> 着
+    <%= t('.eta', time: l(waypoint_eta(@day, i), format: :eta)) %>
   </div>
   <% end %>
 
@@ -12,9 +12,9 @@
 
     <div class="num">
       <% if i == 0 %>
-        始
+        <%= t('.start') %>
       <% elsif i == size - 1 %>
-        終
+        <%= t('.end') %>
       <% else %>
         <%= i %>
       <% end %>
@@ -49,7 +49,7 @@
 
   <% if waypoint.day == @day && i < size - 1 %>
   <div class="etd">
-    <%= (waypoint.stop_min || 0).minutes.since(waypoint_eta(@day, i)).strftime('%H:%M') %> 発
+    <%= t('.etd', time: l((waypoint.stop_min || 0).minutes.since(waypoint_eta(@day, i)), format: :eta)) %>
   </div>
   <% end %>
 </li>

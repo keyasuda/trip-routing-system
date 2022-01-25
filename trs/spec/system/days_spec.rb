@@ -31,7 +31,7 @@ RSpec.describe 'days', type: :system do
       end
 
       it 'shows toast' do
-        expect(page).to have_text('Day was successfully created.')
+        expect(page).to have_text(I18n.t('view.toast.added', name: name))
       end
 
       it 'shows day name' do
@@ -80,10 +80,15 @@ RSpec.describe 'days', type: :system do
             before do
               fill_in 'day_name', with: new_name
               click_button 'done'
+              sleep 1
             end
 
             it 'shows modified name' do
               expect(page).to have_text(new_name)
+            end
+
+            it 'shows toast' do
+              expect(page).to have_text(I18n.t('view.toast.updated', name: new_name))
             end
           end
 
@@ -93,7 +98,7 @@ RSpec.describe 'days', type: :system do
             end
 
             it 'shows toast' do
-              expect(page).to have_text('Day was successfully destroyed.')
+              expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
             end
           end
         end

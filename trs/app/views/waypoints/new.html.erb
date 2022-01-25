@@ -1,4 +1,4 @@
-<% content_for(:title) { "ウェイポイントの追加 - #{@day.name} - #{@trip.name}" } %>
+<% content_for(:title) { "#{t('view.title.add', name: Waypoint.model_name.human)} - #{@day.name} - #{@trip.name}" } %>
 
 <header class="navbar">
   <section class="navbar-section">
@@ -13,7 +13,7 @@
         <%= link_to @day.name, [@trip, @day] %>
       </li>
       <li class="breadcrumb-item">
-        ウェイポイントの追加
+        <%= t('view.title.add', name: Waypoint.model_name.human) %>
       </li>
     </ul>
   </section>

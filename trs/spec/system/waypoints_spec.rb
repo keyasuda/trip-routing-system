@@ -17,8 +17,8 @@ RSpec.describe 'waypoints', type: :system do
       sleep 1
     end
 
-    it 'has "ウェイポイントの追加" in the page title' do
-      expect(page.title).to have_text('ウェイポイントの追加')
+    it 'has "スポットの追加" in the page title' do
+      expect(page.title).to have_text(I18n.t('view.title.add', name: Waypoint.model_name.human))
     end
 
     it 'has day name in the title' do
@@ -106,10 +106,11 @@ RSpec.describe 'waypoints', type: :system do
           before do
             click_link 'edit'
             click_button 'delete'
+            sleep 1
           end
 
           it 'shows toast' do
-            expect(page).to have_text('Waypoint was successfully destroyed.')
+            expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
           end
 
           it 'shows blank list' do
