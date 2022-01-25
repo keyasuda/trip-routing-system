@@ -12,50 +12,90 @@ RSpec.describe 'days', type: :system do
     before do
       visit "/trips/#{trip.id}"
       click_link 'add'
-
-      fill_in 'day_name', with: name
-      fill_in 'day_description', with: description
-      click_button 'done'
+      sleep 1
     end
 
-    it 'shows toast' do
-      expect(page).to have_text('Day was successfully created.')
+    it 'shows 日程の追加 as a title' do
+      expect(page.title).to have_text('日程の追加')
     end
 
-    it 'shows day name' do
-      expect(page).to have_text(name)
+    it 'shows the trip name in a title' do
+      expect(page.title).to have_text(trip.name)
     end
 
-    it 'shows day description' do
-      expect(page).to have_text(description)
-    end
-
-    describe 'day settings' do
+    describe 'add' do
       before do
-        click_link name
-        click_link 'settings'
+        fill_in 'day_name', with: name
+        fill_in 'day_description', with: description
+        click_button 'done'
       end
 
-      describe 'modify the day' do
-        let(:new_name) { 'modified day' }
-
-        before do
-          fill_in 'day_name', with: new_name
-          click_button 'done'
-        end
-
-        it 'shows modified name' do
-          expect(page).to have_text(new_name)
-        end
+      it 'shows toast' do
+        expect(page).to have_text('Day was successfully created.')
       end
 
-      describe 'destroy the day' do
+      it 'shows day name' do
+        expect(page).to have_text(name)
+      end
+
+      it 'shows day description' do
+        expect(page).to have_text(description)
+      end
+
+      describe 'day' do
         before do
-          click_button 'delete'
+          click_link name
+          sleep 1
         end
 
-        it 'shows toast' do
-          expect(page).to have_text('Day was successfully destroyed.')
+        it 'has day name in a page title' do
+          expect(page.title).to have_text(name)
+        end
+
+        it 'has trip name in a page title' do
+          expect(page.title).to have_text(trip.name)
+        end
+
+        describe 'day settings' do
+          before do
+            click_link 'settings'
+            sleep 1
+          end
+
+          it 'has day name in a page title' do
+            expect(page.title).to have_text(name)
+          end
+
+          it 'has "の設定" in a page title' do
+            expect(page.title).to have_text('の設定')
+          end
+
+          it 'has trip name in a page title' do
+            expect(page.title).to have_text(trip.name)
+          end
+
+          describe 'modify the day' do
+            let(:new_name) { 'modified day' }
+
+            before do
+              fill_in 'day_name', with: new_name
+              click_button 'done'
+            end
+
+            it 'shows modified name' do
+              expect(page).to have_text(new_name)
+            end
+          end
+
+          describe 'destroy the day' do
+            before do
+              click_button 'delete'
+            end
+
+            it 'shows toast' do
+              expect(page).to have_text('Day was successfully destroyed.')
+            end
+          end
         end
       end
     end

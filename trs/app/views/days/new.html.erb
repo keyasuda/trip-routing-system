@@ -1,3 +1,5 @@
+<% content_for(:title) { "日程の追加 - #{@trip.name}" } %>
+
 <header class="navbar">
   <section class="navbar-section">
     <ul class="breadcrumb">
@@ -8,7 +10,7 @@
         <%= link_to @trip.name, @trip %>
       </li>
       <li class="breadcrumb-item">
-        新規追加
+        日程の追加
       </li>
     </ul>
   </section>
