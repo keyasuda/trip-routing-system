@@ -5,6 +5,7 @@ require 'system_helper'
 
 RSpec.describe 'waypoints', type: :system do
   let(:day) { FactoryBot.create(:day20220101) }
+  let(:trip) { day.trip }
 
   before do
     visit "/trips/#{day.trip.id}/days/#{day.id}"
@@ -13,6 +14,19 @@ RSpec.describe 'waypoints', type: :system do
   describe 'new waypoint' do
     before do
       click_link 'add'
+      sleep 1
+    end
+
+    it 'has "ウェイポイントの追加" in the page title' do
+      expect(page.title).to have_text('ウェイポイントの追加')
+    end
+
+    it 'has day name in the title' do
+      expect(page.title).to have_text(day.name)
+    end
+
+    it 'has trip name in the title' do
+      expect(page.title).to have_text(trip.name)
     end
 
     describe 'plus code search' do
@@ -53,16 +67,38 @@ RSpec.describe 'waypoints', type: :system do
         end
 
         describe 'edit' do
-          let(:new_name) { 'new waypoint' }
-
           before do
             click_link 'edit'
-            fill_in 'waypoint-name', with: new_name
-            click_button 'done'
+            sleep 1
           end
 
-          it 'updates it' do
-            expect(page).to have_text(new_name)
+          it 'has the waypoint name in the page title' do
+            expect(page.title).to have_text(name)
+          end
+
+          it 'has "の編集" in the page title' do
+            expect(page.title).to have_text('の編集')
+          end
+
+          it 'has the day name in the page title' do
+            expect(page.title).to have_text(day.name)
+          end
+
+          it 'has the trip name in the page title' do
+            expect(page.title).to have_text(trip.name)
+          end
+
+          describe 'update' do
+            let(:new_name) { 'new waypoint' }
+
+            before do
+              fill_in 'waypoint-name', with: new_name
+              click_button 'done'
+            end
+
+            it 'updates it' do
+              expect(page).to have_text(new_name)
+            end
           end
         end
 

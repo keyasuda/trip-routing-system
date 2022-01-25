@@ -1,3 +1,5 @@
+<% content_for(:title) { "ウェイポイントの追加 - #{@day.name} - #{@trip.name}" } %>
+
 <header class="navbar">
   <section class="navbar-section">
     <ul class="breadcrumb">
@@ -11,7 +13,7 @@
         <%= link_to @day.name, [@trip, @day] %>
       </li>
       <li class="breadcrumb-item">
-        New waypoint
+        ウェイポイントの追加
       </li>
     </ul>
   </section>
