@@ -7,5 +7,6 @@
     data-controller="day-map"
     data-day-map-waypoints-value="<%= @day.ordered_waypoints.to_json %>"
     data-day-map-routes-value="<%= @day.routes.to_json %>"
+    data-day-map-endpoint-value="<%= Settings.tiles %>"
     data-day-map-target="map"></div>
 <% end if @day == @to %>

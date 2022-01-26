@@ -1,0 +1,3 @@
+tiles: http://localhost:8001
+routing: http://localhost:8002
+search: http://localhost:8003

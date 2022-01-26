@@ -40,7 +40,7 @@ class Waypoint < ApplicationRecord
   end
 
   def self.call_nominatim(keyword)
-    ret = Faraday.get("http://localhost:8003/search?q=#{ERB::Util.u(keyword)}")
+    ret = Faraday.get("#{Settings.search}/search?q=#{ERB::Util.u(keyword)}")
     results = JSON.parse(ret.body)
 
     results.map { |r|
@@ -53,7 +53,7 @@ class Waypoint < ApplicationRecord
   end
 
   def self.get_display_name(pos)
-    ret = Faraday.get("http://localhost:8003/reverse?lat=#{pos.latitude_center}&lon=#{pos.longitude_center}&format=json")
+    ret = Faraday.get("#{Settings.search}/reverse?lat=#{pos.latitude_center}&lon=#{pos.longitude_center}&format=json")
     JSON.parse(ret.body)['display_name']
   end
 end

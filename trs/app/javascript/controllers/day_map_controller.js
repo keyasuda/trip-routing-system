@@ -5,11 +5,11 @@ import 'leaflet-extra-markers'
 
 export default class extends Controller {
   static targets = ['map']
-  static values = { waypoints: Array, routes: Array }
+  static values = { waypoints: Array, routes: Array, endpoint: String }
 
   connect() {
     const map = L.map(this.mapTarget)
-    L.tileLayer('http://localhost:8001/tile/{z}/{x}/{y}.png', {
+    L.tileLayer(this.endpointValue + '/tile/{z}/{x}/{y}.png', {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18,

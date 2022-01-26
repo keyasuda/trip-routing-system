@@ -38,7 +38,7 @@ class Day < ApplicationRecord
 
     payload = { 'locations' => locations, 'costing' => costing }
 
-    ret = Faraday.get("http://localhost:8002/#{method}", { json: payload.to_json })
+    ret = Faraday.get("#{Settings.routing}/#{method}", { json: payload.to_json })
     JSON.parse(ret.body)
   end
 end
