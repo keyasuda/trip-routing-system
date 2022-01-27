@@ -1,0 +1,16 @@
+<%=
+cal = Icalendar::Calendar.new
+
+@trip.days.each do |day|
+  day.ordered_waypoints.each.with_index do |w, i|
+    cal.event do |e|
+      e.summary = w.name
+      e.location = w.plus_code
+      e.dtstart = waypoint_eta(day, i)
+      e.dtend = (w.stop_min || 0).minutes.since(waypoint_eta(day, i))
+    end
+  end
+end
+
+cal.to_ical
+%>

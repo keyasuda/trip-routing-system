@@ -41,6 +41,32 @@ RSpec.describe '/trips', type: :request do
     end
   end
 
+  describe 'GET /show.ics' do
+    before do
+      VCR.use_cassette 'valhalla_route' do
+        get trip_url(trip, format: :ics)
+      end
+    end
+
+    let(:trip) { FactoryBot.create(:unoptimized_day).trip }
+
+    it 'renders a successful response' do
+      expect(response).to be_successful
+    end
+
+    it 'returns waypoints in ICS' do
+      actual = Icalendar::Calendar.parse(response.body).first
+      trip.days.each do |day|
+        day.ordered_waypoints.each.with_index do |w, i|
+          event = actual.events[i]
+          expect(event.summary).to eq w.name
+          expect(event.location).to eq w.plus_code
+          expect(event.dtend).to eq (w.stop_min || 0).minutes.since(event.dtstart)
+        end
+      end
+    end
+  end
+
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_trip_url
