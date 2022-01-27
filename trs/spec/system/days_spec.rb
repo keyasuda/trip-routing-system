@@ -137,7 +137,6 @@ RSpec.describe 'days', type: :system do
       click_link 'add'
     end
 
-    # rubocop:disable RSpec/ExampleLength
     it 'shows the next date as default' do
       y = page.find('#day_start_at_1i').value
       m = page.find('#day_start_at_2i').value
@@ -148,6 +147,5 @@ RSpec.describe 'days', type: :system do
 
       expect(actual).to eq '2022-1-2 10:00'
     end
-    # rubocop:enable RSpec/ExampleLength
   end
 end

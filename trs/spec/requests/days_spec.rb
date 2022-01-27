@@ -135,7 +135,6 @@ RSpec.describe '/days', type: :request do
     describe 'in single day' do
       let(:waypoints) { day1.waypoints.map(&:id).reverse }
 
-      # rubocop:disable RSpec/ExampleLength
       it 'set order of waypoints' do
         VCR.use_cassette 'valhalla_reordered_route' do
           post order_waypoints_trip_day_url(day1.trip, day1),
@@ -152,7 +151,6 @@ RSpec.describe '/days', type: :request do
         actual = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
         expect(actual).to eq waypoints
       end
-      # rubocop:enable RSpec/ExampleLength
     end
 
     describe 'in two days' do
