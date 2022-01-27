@@ -18,11 +18,11 @@ RSpec.describe '/trips', type: :request do
   # Trip. As you add validations to Trip, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
+    FactoryBot.attributes_for(:trip)
   }
 
   let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
+    { name: '' }
   }
 
   describe 'GET /index' do
@@ -77,9 +77,9 @@ RSpec.describe '/trips', type: :request do
         }.to change(Trip, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it 'returns error response' do
         post trips_url, params: { trip: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.successful?).to be false
       end
     end
   end
@@ -87,14 +87,14 @@ RSpec.describe '/trips', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) {
-        skip('Add a hash of attributes valid for your model')
+        { name: 'new name' }
       }
 
       it 'updates the requested trip' do
         trip = Trip.create! valid_attributes
         patch trip_url(trip), params: { trip: new_attributes }
         trip.reload
-        skip('Add assertions for updated state')
+        expect(trip.name).to eq new_attributes[:name]
       end
 
       it 'redirects to the trip' do
@@ -106,10 +106,10 @@ RSpec.describe '/trips', type: :request do
     end
 
     context 'with invalid parameters' do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it 'returns failure response' do
         trip = Trip.create! valid_attributes
         patch trip_url(trip), params: { trip: invalid_attributes }
-        expect(response).to be_successful
+        expect(response.successful?).to be false
       end
     end
   end
