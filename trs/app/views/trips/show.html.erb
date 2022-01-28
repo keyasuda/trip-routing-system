@@ -13,6 +13,10 @@
   </section>
 
   <section class="navbar-section">
+    <%= link_to trip_path(@trip, format: :ics), class: 'btn btn-link' do %>
+      <span class="material-icons-outlined">file_download</span>
+    <% end %>
+
     <%= link_to edit_trip_path(@trip), class: 'btn btn-link' do %>
       <span class="material-icons-outlined">settings</span>
     <% end %>
