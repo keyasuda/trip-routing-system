@@ -10,4 +10,8 @@ if [ ! "$result" = "0" ]; then
 fi
 
 echo "Starting OSM tile server service..."
-/run.sh run
+/run.sh run &
+sleep 5
+
+render_list -a -n 16 -z 0 -Z 12 -m ajt
+/bin/sh -c " while :; do sleep 10; done"
