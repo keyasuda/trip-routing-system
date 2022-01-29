@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="columns" data-controller="waypoints">
+  <div
+    class="columns"
+    data-controller="waypoints"
+    data-waypoints-endpoint-value="<%= Settings.tiles %>">
     <div class="column col-3 pois-container">
       <%= form_tag trip_day_waypoints_search_poi_path(@trip, @day), method: 'get' do %>
       <div class="input-group">

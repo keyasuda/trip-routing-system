@@ -2,18 +2,14 @@ import { Controller } from '@hotwired/stimulus'
 import L from 'leaflet'
 import 'polyline-encoded'
 import 'leaflet-extra-markers'
+import init from './mapInitializer'
 
 export default class extends Controller {
   static targets = ['map']
   static values = { waypoints: Array, routes: Array, endpoint: String }
 
   connect() {
-    const map = L.map(this.mapTarget)
-    L.tileLayer(this.endpointValue + '/tile/{z}/{x}/{y}.png', {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(map)
+    const map = init(this.mapTarget, this.endpointValue)
     this.map = map
 
     // 全waypointsのマーカーを生成
