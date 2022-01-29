@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:8003/search?q=%E9%87%8E%E5%B3%B6%E5%9F%BC%E7%81%AF%E5%8F%B0
+    uri: http://localhost:3001/search/search?q=%E9%87%8E%E5%B3%B6%E5%9F%BC%E7%81%AF%E5%8F%B0
     body:
       encoding: US-ASCII
       string: ''
