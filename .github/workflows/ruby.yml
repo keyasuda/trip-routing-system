@@ -17,8 +17,8 @@ jobs:
         with:
           ruby-version: 3.1
       - name: Install dependencies
-        run: cd trs && bundle install
+        run: bundle install
       - name: Precompile assets
-        run: cd trs && bundle exec rails assets:precompile
+        run: bundle exec rails assets:precompile
       - name: Run tests
-        run: cd trs && bundle exec rspec --exclude-pattern 'spec/system/**'
+        run: bundle exec rspec --exclude-pattern 'spec/system/**'
