@@ -7,9 +7,8 @@ RUN apt-get update \
 COPY . /app
 
 WORKDIR /app
-RUN bundle \
-  && bundle exec rails assets:precompile \
-  && RAILS_ENV=production rails db:migrate
+ENV SECRET_KEY_BASE=hogehoge
+RUN bundle && bundle exec rails assets:precompile
 
 ENV RAILS_SERVE_STATIC_FILES=true
-CMD rails s -e production
+CMD RAILS_ENV=production rails db:migrate && rm /app/tmp/pids/*; rails s -e production

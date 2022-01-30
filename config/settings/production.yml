@@ -1,0 +1,3 @@
+tiles: /tiles
+routing: http://valhalla:8002
+search: http://nominatim:8080
