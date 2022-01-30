@@ -21,7 +21,7 @@
 
 1. `wget https://download.geofabrik.de/asia/japan-latest.osm.pbf`
 1. `docker-compose build`
-1. `docker-compose up -d app`
+1. `docker-compose up -d prod-proxy`
 
 - 初回起動時は地図データのインポートが行われます
   - マシンスペックにもよりますが数時間かかります
