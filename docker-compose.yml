@@ -9,6 +9,11 @@ volumes:
 services:
   app:
     build: ./
+    depends_on:
+      - openstreetmap-tile-server
+      - valhalla
+      - nominatim
+      - prod-proxy
     volumes:
       - type: bind
         source: "./db"
@@ -24,6 +29,10 @@ services:
         target: "/etc/nginx/nginx.conf"
 
   dev-proxy:
+    depends_on:
+      - openstreetmap-tile-server
+      - valhalla
+      - nominatim
     image: nginx:latest
     ports:
       - "3001:80"
