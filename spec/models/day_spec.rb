@@ -36,6 +36,22 @@ RSpec.describe Day, type: :model do
 
         expect(actual.flat_map(&:keys).uniq).to eq %w[maneuvers summary shape]
       end
+
+      describe 'blank day' do
+        subject { VCR.use_cassette('blank_route') { day.routes } }
+
+        let(:day) { FactoryBot.create(:day20220101) }
+
+        it { is_expected.to eq [] }
+      end
+
+      describe 'day with one waypoint' do
+        subject { VCR.use_cassette('one_waypoint_route') { day.routes } }
+
+        let(:day) { FactoryBot.create(:day20220101).tap { |d| d.waypoints << FactoryBot.create(:waypoint0, day: d) } }
+
+        it { is_expected.to eq [] }
+      end
     end
   end
 end

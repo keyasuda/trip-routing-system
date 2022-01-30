@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3001/routing/route?json=%7B%22locations%22:%5B%5D,%22costing%22:%22auto%22%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.1.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.21.6
+      Date:
+      - Sun, 30 Jan 2022 04:11:52 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '125'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"error_code":110,"error":"Insufficiently specified required parameter
+        ''locations''","status_code":400,"status":"Bad Request"}'
+  recorded_at: Sun, 30 Jan 2022 04:11:52 GMT
+recorded_with: VCR 6.0.0
