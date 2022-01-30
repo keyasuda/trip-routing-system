@@ -5,13 +5,14 @@ volumes:
   osm-tiles:
   valhalla_tiles:
   nominatim-data:
-  trs-data:
 
 services:
   app:
     build: ./
     volumes:
-      - trs-data:/app/db
+      - type: bind
+        source: "./db"
+        target: "/app/db"
 
   prod-proxy:
     image: nginx:latest
