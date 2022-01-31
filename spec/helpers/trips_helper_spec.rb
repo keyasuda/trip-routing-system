@@ -2,16 +2,12 @@
 
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the TripsHelper. For example:
-#
-# describe TripsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe TripsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:day) { FactoryBot.create(:unoptimized_day) }
+
+  it 'returns Google map URL with plus code of waypoints' do
+    expect(helper.google_map_url(day)).to eq ['https://www.google.co.jp/maps/dir', day.ordered_waypoints.map(&:plus_code).map { |c|
+                                                                                     ERB::Util.u(c)
+                                                                                   }].flatten.join('/')
+  end
 end

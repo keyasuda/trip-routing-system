@@ -34,7 +34,13 @@
   <p><%= @trip.description %></p>
 
   <% @trip.days.each do |day| %>
-    <h2><%= day.start_at.strftime('%Y-%m-%d') if day.start_at %> <%= link_to day.name, [@trip, day] %></h2>
+    <h2>
+      <%= day.start_at.strftime('%Y-%m-%d') if day.start_at %> <%= link_to day.name, [@trip, day] %>
+      <%= link_to(google_map_url(day), class: 'btn btn-link') do %>
+        <span class="material-icons-outlined">map</span>
+      <% end %>
+    </h2>
+
     <p><%= day.description %></p>
 
     <% day.ordered_waypoints.each.with_index do |waypoint, i| %>
