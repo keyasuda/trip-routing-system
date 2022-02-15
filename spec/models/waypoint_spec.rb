@@ -45,6 +45,18 @@ RSpec.describe Waypoint, type: :model do
           expect(actual).to eq [heso]
         end
       end
+
+      describe 'too long codes' do
+        let(:code) { "#{'2' * 28}+22" }
+
+        it 'wont decode it as a plus code' do
+          actual =
+            VCR.use_cassette 'nominatim_toolongpluscode' do
+              described_class.search_poi(code)
+            end
+          expect(actual).to eq []
+        end
+      end
     end
   end
 end
