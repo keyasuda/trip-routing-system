@@ -11,32 +11,39 @@ class Waypoint < ApplicationRecord
   end
 
   def self.search_poi(keyword)
-    m = keyword.match(/\A([2-9CFGHJMPQRVWX]+\+[2-9CFGHJMPQRV
+    m =
+      if keyword.length <= 30
+        keyword.match(/\A([2-9CFGHJMPQRVWX]+\+[2-9CFGHJMPQRV
  WX]+) ?(.*?)\z/)
+      end
 
     if m
       # plus codeが与えられた場合
-      olc = PlusCodes::OpenLocationCode.new
-      decoded =
-        if m[2].blank?
-          olc.decode(keyword)
-        else
-          # short code
-          # reference locationの座標を得る
-          ref = call_nominatim(m[2]).first
-          full_code = olc.recover_nearest(m[1].strip, ref[:lat], ref[:lon])
-          olc.decode(full_code)
-        end
-
-      [{
-        lat: decoded.latitude_center,
-        lon: decoded.longitude_center,
-        display_name: get_display_name(decoded),
-      }]
+      [self.decode_matched_plus_code(m)]
     else
       # それ以外
       self.call_nominatim(keyword)
     end
+  end
+
+  def self.decode_matched_plus_code(matched)
+    olc = PlusCodes::OpenLocationCode.new
+    decoded =
+      if matched[2].blank?
+        olc.decode(matched.to_s)
+      else
+        # short code
+        # reference locationの座標を得る
+        ref = call_nominatim(matched[2]).first
+        full_code = olc.recover_nearest(matched[1].strip, ref[:lat], ref[:lon])
+        olc.decode(full_code)
+      end
+
+    {
+      lat: decoded.latitude_center,
+      lon: decoded.longitude_center,
+      display_name: get_display_name(decoded),
+    }
   end
 
   def self.call_nominatim(keyword)
