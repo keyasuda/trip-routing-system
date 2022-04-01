@@ -12,7 +12,7 @@ gem 'rails', '~> 7.0.0'
 gem 'sqlite3', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 5.6', '>= 5.6.4'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails', '>= 0.7.11'
