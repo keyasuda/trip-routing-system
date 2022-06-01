@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
+gem 'rails', '~> 7.0.3'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -15,10 +15,10 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.6'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '>= 1.0.1'
+gem 'turbo-rails', '>= 1.1.1'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '>= 1.0.2'
+gem 'stimulus-rails', '>= 1.0.4'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  gem 'rspec-rails', '~> 5.0.2'
+  gem 'rspec-rails', '~> 5.0.3'
 end
 
 group :development do
@@ -64,7 +64,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara', '>= 3.36.0'
+  gem 'capybara', '>= 3.37.1'
   gem 'cuprite'
   gem 'vcr'
   gem 'webmock'
@@ -76,7 +76,7 @@ gem 'jsbundling-rails'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 7.0.1'
+gem 'rails-i18n', '~> 7.0.3'
 
 gem 'config'
 
