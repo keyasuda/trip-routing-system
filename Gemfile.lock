@@ -253,7 +253,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.2)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     rails-i18n (7.0.3)
       i18n (>= 0.7, < 2)
@@ -366,7 +366,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
-  capybara (>= 3.36.0)
+  capybara (>= 3.37.1)
   config
   cuprite
   debug (>= 1.0.0)
@@ -380,13 +380,13 @@ DEPENDENCIES
   jsbundling-rails
   open-location-code (~> 1.0)
   puma (~> 5.6)
-  rails (~> 7.0.2, >= 7.0.2.4)
-  rails-i18n (~> 7.0.1)
-  rspec-rails (~> 5.0.2)
+  rails (~> 7.0.3)
+  rails-i18n (~> 7.0.3)
+  rspec-rails (~> 5.0.3)
   sassc-rails (~> 2.1, >= 2.1.2)
   sqlite3 (~> 1.4)
-  stimulus-rails (>= 1.0.2)
-  turbo-rails (>= 1.0.1)
+  stimulus-rails (>= 1.0.4)
+  turbo-rails (>= 1.1.1)
   tzinfo-data
   vcr
   web-console (>= 4.2.0)
