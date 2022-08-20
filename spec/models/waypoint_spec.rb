@@ -15,7 +15,7 @@ RSpec.describe Waypoint, type: :model do
 
   context 'plus code' do
     describe 'return plus code of the waypoint' do
-      let(:waypoint) { FactoryBot.build(:heso) }
+      let(:waypoint) { build(:heso) }
 
       it 'returns valid full plus code' do
         expect(waypoint.plus_code).to eq '8Q7Q2222+22'

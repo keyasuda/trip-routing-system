@@ -10,7 +10,7 @@ RSpec.describe DaysHelper, type: :helper do
       end
     end
 
-    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:day) { create(:unoptimized_day) }
     let(:index) { 3 }
 
     describe 'mid waypoint' do
@@ -35,7 +35,7 @@ RSpec.describe DaysHelper, type: :helper do
       end
     end
 
-    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:day) { create(:unoptimized_day) }
     let(:index) { 3 }
 
     describe 'mid waypoint' do

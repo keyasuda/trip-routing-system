@@ -15,12 +15,12 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/waypoints', type: :request do
-  let!(:waypoint) { FactoryBot.create(:waypoint) }
+  let!(:waypoint) { create(:waypoint) }
   let(:day) { waypoint.day }
   let(:trip) { day.trip }
 
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:waypoint).tap { |a| a.delete(:index) }
+    attributes_for(:waypoint).tap { |a| a.delete(:index) }
   }
 
   let(:invalid_attributes) {
@@ -58,7 +58,7 @@ RSpec.describe '/waypoints', type: :request do
       it 'does not create a new Waypoint' do
         expect {
           post trip_day_waypoints_url(trip, day), params: { waypoint: invalid_attributes }
-        }.to change(day.waypoints, :count).by(0)
+        }.not_to change(day.waypoints, :count)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do

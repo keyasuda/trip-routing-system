@@ -4,7 +4,7 @@ require 'system_helper'
 # for debug with inspector/irb put page.driver.debug(binding)
 
 RSpec.describe 'waypoints', type: :system do
-  let(:day) { FactoryBot.create(:day20220101) }
+  let(:day) { create(:day20220101) }
   let(:trip) { day.trip }
 
   before do
@@ -110,7 +110,7 @@ RSpec.describe 'waypoints', type: :system do
           end
 
           it 'shows toast' do
-            expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
+            expect(page).to have_text(I18n.t('view.toast.destroyed', name:))
           end
 
           it 'shows blank list' do

@@ -17,7 +17,7 @@ require 'rails_helper'
 RSpec.describe '/days', type: :request do
   describe 'GET /index' do
     it 'renders a successful response' do
-      day = FactoryBot.create(:day)
+      day = create(:day)
       get trip_days_url(day.trip)
       expect(response).to be_successful
     end
@@ -25,7 +25,7 @@ RSpec.describe '/days', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      day = FactoryBot.create(:unoptimized_day)
+      day = create(:unoptimized_day)
       VCR.use_cassette 'valhalla_route' do
         get trip_day_url(day.trip, day)
       end
@@ -35,7 +35,7 @@ RSpec.describe '/days', type: :request do
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      trip = FactoryBot.create(:filled_trip)
+      trip = create(:filled_trip)
       get new_trip_day_url(trip)
       expect(response).to be_successful
     end
@@ -43,17 +43,17 @@ RSpec.describe '/days', type: :request do
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      day = FactoryBot.create(:day)
+      day = create(:day)
       get edit_trip_day_url(day.trip, day)
       expect(response).to be_successful
     end
   end
 
   describe 'POST /create' do
-    let!(:trip) { FactoryBot.create(:filled_trip) }
+    let!(:trip) { create(:filled_trip) }
 
     context 'with valid parameters' do
-      let(:attributes) { FactoryBot.attributes_for(:day) }
+      let(:attributes) { attributes_for(:day) }
 
       it 'creates a new Day' do
         expect {
@@ -73,7 +73,7 @@ RSpec.describe '/days', type: :request do
       it 'does not create a new Day' do
         expect {
           post trip_days_url(trip), params: { day: invalid_attributes }
-        }.to change(Day, :count).by(0)
+        }.not_to change(Day, :count)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -84,7 +84,7 @@ RSpec.describe '/days', type: :request do
   end
 
   describe 'PATCH /update' do
-    let(:day) { FactoryBot.create(:day) }
+    let(:day) { create(:day) }
 
     context 'with valid parameters' do
       let(:new_attributes) {
@@ -114,7 +114,7 @@ RSpec.describe '/days', type: :request do
   end
 
   describe 'DELETE /destroy' do
-    let!(:day) { FactoryBot.create(:day) }
+    let!(:day) { create(:day) }
 
     it 'destroys the requested day' do
       expect {
@@ -129,8 +129,8 @@ RSpec.describe '/days', type: :request do
   end
 
   describe 'POST /order_waypoints' do
-    let(:day1) { FactoryBot.create(:unoptimized_day) }
-    let(:day2) { FactoryBot.create(:day, trip: day1.trip) }
+    let(:day1) { create(:unoptimized_day) }
+    let(:day2) { create(:day, trip: day1.trip) }
 
     describe 'in single day' do
       let(:waypoints) { day1.waypoints.map(&:id).reverse }
@@ -142,7 +142,7 @@ RSpec.describe '/days', type: :request do
                  waypoints_order: {
                    to: {
                      day_id: day1.id,
-                     waypoints: waypoints,
+                     waypoints:,
                    },
                  }.to_json,
                }
