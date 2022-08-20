@@ -22,7 +22,7 @@ class DaysController < ApplicationController
       else
         Time.zone.now
       end
-    @day = @trip.days.build(start_at: start_at)
+    @day = @trip.days.build(start_at:)
   end
 
   # GET /days/1/edit

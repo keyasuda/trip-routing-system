@@ -33,7 +33,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
       end
 
       it 'shows toast' do
-        expect(page).to have_text(I18n.t('view.toast.added', name: name))
+        expect(page).to have_text(I18n.t('view.toast.added', name:))
       end
 
       it 'shows trip name' do
@@ -84,7 +84,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
         end
 
         it 'shows toast' do
-          expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
+          expect(page).to have_text(I18n.t('view.toast.destroyed', name:))
         end
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
 
   describe 'trip list' do
     describe 'blank trip' do
-      let(:existing_trips) { FactoryBot.create(:trip) }
+      let(:existing_trips) { create(:trip) }
 
       it 'shows the name' do
         expect(page).to have_text(existing_trips.name)
@@ -100,7 +100,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
     end
 
     describe 'single day trip' do
-      let(:existing_trips) { FactoryBot.create(:single_day_trip) }
+      let(:existing_trips) { create(:single_day_trip) }
 
       it'shows the name' do
         expect(page).to have_text(existing_trips.name)
@@ -112,7 +112,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
     end
 
     describe 'two days trip' do
-      let(:existing_trips) { FactoryBot.create(:two_days_trip) }
+      let(:existing_trips) { create(:two_days_trip) }
 
       it 'shows 1st day date' do
         expect(page).to have_text('2022-01-01 - 2022-01-02')
@@ -120,7 +120,7 @@ RSpec.describe 'trips', type: :system, vcr: false do
     end
 
     describe 'three days trip' do
-      let(:existing_trips) { FactoryBot.create(:three_days_trip) }
+      let(:existing_trips) { create(:three_days_trip) }
 
       it 'shows 1st day date' do
         expect(page).to have_text('2022-01-01 - 2022-01-03')
@@ -128,9 +128,9 @@ RSpec.describe 'trips', type: :system, vcr: false do
     end
 
     describe 'trip order' do
-      let(:trip1) { FactoryBot.create(:day20220101).trip }
-      let(:trip2) { FactoryBot.create(:day20220102).trip }
-      let(:trip3) { FactoryBot.create(:day20220103).trip }
+      let(:trip1) { create(:day20220101).trip }
+      let(:trip2) { create(:day20220102).trip }
+      let(:trip3) { create(:day20220103).trip }
       let(:existing_trips) { [trip1, trip2, trip3] }
 
       it 'shows 1/3 as a top' do

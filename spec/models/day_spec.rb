@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Day, type: :model do
   describe 'accessors for waypoints' do
     before do
-      @day = FactoryBot.create(:filled_trip).days.first
+      @day = create(:filled_trip).days.first
       @waypoints = @day.waypoints.shuffle
       @waypoints.each_with_index { |w, i| w.update(index: i) }
     end
@@ -16,7 +16,7 @@ RSpec.describe Day, type: :model do
   end
 
   describe 'routes' do
-    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:day) { create(:unoptimized_day) }
 
     describe 'optimizer' do
       it 'optimizeses waypoints order' do
@@ -40,7 +40,7 @@ RSpec.describe Day, type: :model do
       describe 'blank day' do
         subject { VCR.use_cassette('blank_route') { day.routes } }
 
-        let(:day) { FactoryBot.create(:day20220101) }
+        let(:day) { create(:day20220101) }
 
         it { is_expected.to eq [] }
       end
@@ -48,7 +48,7 @@ RSpec.describe Day, type: :model do
       describe 'day with one waypoint' do
         subject { VCR.use_cassette('one_waypoint_route') { day.routes } }
 
-        let(:day) { FactoryBot.create(:day20220101).tap { |d| d.waypoints << FactoryBot.create(:waypoint0, day: d) } }
+        let(:day) { create(:day20220101).tap { |d| d.waypoints << create(:waypoint0, day: d) } }
 
         it { is_expected.to eq [] }
       end

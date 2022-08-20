@@ -5,7 +5,7 @@ require 'system_helper'
 
 RSpec.describe 'days', type: :system do
   describe 'new day' do
-    let(:trip) { FactoryBot.create(:trip) }
+    let(:trip) { create(:trip) }
     let(:name) { 'new day' }
     let(:description) { 'day description' }
 
@@ -31,7 +31,7 @@ RSpec.describe 'days', type: :system do
       end
 
       it 'shows toast' do
-        expect(page).to have_text(I18n.t('view.toast.added', name: name))
+        expect(page).to have_text(I18n.t('view.toast.added', name:))
       end
 
       it 'shows day name' do
@@ -98,7 +98,7 @@ RSpec.describe 'days', type: :system do
             end
 
             it 'shows toast' do
-              expect(page).to have_text(I18n.t('view.toast.destroyed', name: name))
+              expect(page).to have_text(I18n.t('view.toast.destroyed', name:))
             end
           end
         end
@@ -107,7 +107,7 @@ RSpec.describe 'days', type: :system do
   end
 
   describe 'routing' do
-    let(:day) { FactoryBot.create(:unoptimized_day) }
+    let(:day) { create(:unoptimized_day) }
 
     before do
       visit "/trips/#{day.trip.id}/days/#{day.id}"
@@ -130,7 +130,7 @@ RSpec.describe 'days', type: :system do
   end
 
   describe 'additonal day' do
-    let(:day) { FactoryBot.create(:day20220101) }
+    let(:day) { create(:day20220101) }
 
     before do
       visit "/trips/#{day.trip.id}"

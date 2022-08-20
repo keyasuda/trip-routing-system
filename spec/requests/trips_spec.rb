@@ -18,7 +18,7 @@ RSpec.describe '/trips', type: :request do
   # Trip. As you add validations to Trip, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryBot.attributes_for(:trip)
+    attributes_for(:trip)
   }
 
   let(:invalid_attributes) {
@@ -48,7 +48,7 @@ RSpec.describe '/trips', type: :request do
       end
     end
 
-    let(:trip) { FactoryBot.create(:unoptimized_day).trip }
+    let(:trip) { create(:unoptimized_day).trip }
 
     it 'renders a successful response' do
       expect(response).to be_successful
@@ -100,7 +100,7 @@ RSpec.describe '/trips', type: :request do
       it 'does not create a new Trip' do
         expect {
           post trips_url, params: { trip: invalid_attributes }
-        }.to change(Trip, :count).by(0)
+        }.not_to change(Trip, :count)
       end
 
       it 'returns error response' do
