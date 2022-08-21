@@ -6,10 +6,15 @@ import init from './mapInitializer'
 
 export default class extends Controller {
   static targets = ['map']
-  static values = { waypoints: Array, routes: Array, endpoint: String }
+  static values = {
+    waypoints: Array,
+    routes: Array,
+    endpoint: String,
+    attribution: String,
+  }
 
   connect() {
-    const map = init(this.mapTarget, this.endpointValue)
+    const map = init(this.mapTarget, this.endpointValue, this.attributionValue)
     this.map = map
 
     // 全waypointsのマーカーを生成
