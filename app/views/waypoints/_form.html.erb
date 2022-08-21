@@ -2,7 +2,8 @@
   <div
     class="columns"
     data-controller="waypoints"
-    data-waypoints-endpoint-value="<%= Settings.tiles %>">
+    data-waypoints-endpoint-value="<%= Settings.tiles.endpoint %>"
+    data-waypoints-attribution-value="<%= Settings.tiles.attribution %>">
     <div class="column col-3 pois-container">
       <%= form_tag trip_day_waypoints_search_poi_path(@trip, @day), method: 'get' do %>
       <div class="input-group">

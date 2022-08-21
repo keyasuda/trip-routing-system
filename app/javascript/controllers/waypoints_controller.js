@@ -4,10 +4,10 @@ import init from './mapInitializer'
 
 export default class extends Controller {
   static targets = ['map', 'latitude', 'longitude']
-  static values = { endpoint: String }
+  static values = { endpoint: String, attribution: String }
 
   connect() {
-    const map = init(this.mapTarget, this.endpointValue)
+    const map = init(this.mapTarget, this.endpointValue, this.attributionValue)
     window.map = map
 
     const lat = this.latitudeTarget.value
