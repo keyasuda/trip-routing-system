@@ -1,4 +1,4 @@
-FROM overv/openstreetmap-tile-server:v1.7.4
+FROM overv/openstreetmap-tile-server:2.2.0
 
 COPY entrypoint.sh /
 
