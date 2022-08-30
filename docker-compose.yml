@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 volumes:
   osm-pgdata:
@@ -11,8 +11,8 @@ services:
     build: ./
     volumes:
       - type: bind
-        source: "./db"
-        target: "/app/db"
+        source: './db'
+        target: '/app/db'
 
   prod-proxy:
     depends_on:
@@ -22,11 +22,11 @@ services:
       - app
     image: nginx:latest
     ports:
-      - "3009:80"
+      - '3009:80'
     volumes:
       - type: bind
-        source: "./vendor/docker/prod-proxy/nginx.conf"
-        target: "/etc/nginx/nginx.conf"
+        source: './vendor/docker/prod-proxy/nginx.conf'
+        target: '/etc/nginx/nginx.conf'
 
   dev-proxy:
     depends_on:
@@ -35,28 +35,29 @@ services:
       - nominatim
     image: nginx:latest
     ports:
-      - "3001:80"
+      - '3001:80'
     volumes:
       - type: bind
-        source: "./vendor/docker/dev-proxy/nginx.conf"
-        target: "/etc/nginx/nginx.conf"
+        source: './vendor/docker/dev-proxy/nginx.conf'
+        target: '/etc/nginx/nginx.conf'
 
   openstreetmap-tile-server:
     build: ./vendor/docker/openstreetmap-tile-server/
+    shm_size: 512mb
     volumes:
-      - osm-pgdata:/var/lib/postgresql/12/main
-      - osm-tiles:/var/lib/mod_tile
+      - osm-pgdata:/var/lib/postgresql/14/main
+      - osm-tiles:/data/tiles
       - type: bind
-        source: "./japan-latest.osm.pbf"
-        target: "/data.osm.pbf"
+        source: './japan-latest.osm.pbf'
+        target: '/data/region.osm.pbf'
 
   valhalla:
     build: ./vendor/docker/valhalla/
     volumes:
-      - "valhalla_tiles:/data"
+      - 'valhalla_tiles:/data'
       - type: bind
-        source: "./japan-latest.osm.pbf"
-        target: "/data.osm.pbf"
+        source: './japan-latest.osm.pbf'
+        target: '/data.osm.pbf'
 
   nominatim:
     image: mediagis/nominatim:3.7
@@ -64,7 +65,7 @@ services:
       - PBF_PATH=/nominatim/data.osm.pbf
       - REPLICATION_URL=https://download.geofabrik.de/asia/japan-updates/
     volumes:
-      - "nominatim-data:/var/lib/postgresql/12/main"
+      - 'nominatim-data:/var/lib/postgresql/12/main'
       - type: bind
-        source: "./japan-latest.osm.pbf"
-        target: "/nominatim/data.osm.pbf"
+        source: './japan-latest.osm.pbf'
+        target: '/nominatim/data.osm.pbf'
