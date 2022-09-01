@@ -27,7 +27,17 @@
   - マシンスペックにもよりますが数時間かかります
   - メモリを大量に消費しますので swapfile を追加すると良いでしょう
     - 32GB メモリ搭載機で swap 無しの場合 OOM が発生しました
-- インポート完了後は使用できますが、バックグラウンドで地図タイルのバッチ生成処理が走るためしばらく CPU 使用率が高くなります
+
+### 地図タイルの事前生成
+
+```
+$ docker exec -it trip_routing_system-openstreetmap-tile-server-1 bash
+
+$ render_list -a -n $THREADS -z 0 -Z 9
+$ wget -O /data/tiles/render_list_geo.pl https://raw.githubusercontent.com/SomeoneElseOSM/render_list_geo.pl/master/render_list_geo.pl
+$ chmod u+x /data/tiles/render_list_geo.pl
+$ /data/tiles/render_list_geo.pl -n $THREADS -z 10 -Z 15 -x 117.817 -X 158.643 -y 19.849 -Y 51.069
+```
 
 ## 利用方法
 
