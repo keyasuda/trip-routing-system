@@ -1,5 +1,5 @@
 tiles:
-  endpoint: /tiles
+  endpoint: /tiles/tile/{z}/{x}/{y}.png
   attribution: Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
 routing: http://valhalla:8002
 search: http://nominatim:8080
