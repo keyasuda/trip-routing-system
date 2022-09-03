@@ -8,7 +8,7 @@ volumes:
 
 services:
   app:
-    build: ./
+    image: ghcr.io/keyasuda/trip-routing-system:latest
     environment:
       - RAILS_ENV=production
       # ローカルで使う前提なので固定でも良い
