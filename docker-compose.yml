@@ -9,6 +9,10 @@ volumes:
 services:
   app:
     build: ./
+    environment:
+      - RAILS_ENV=production
+      # ローカルで使う前提なので固定でも良い
+      - SECRET_KEY_BASE=hogehoge
     volumes:
       - type: bind
         source: './db'
@@ -26,19 +30,6 @@ services:
     volumes:
       - type: bind
         source: './vendor/docker/prod-proxy/nginx.conf'
-        target: '/etc/nginx/nginx.conf'
-
-  dev-proxy:
-    depends_on:
-      - openstreetmap-tile-server
-      - valhalla
-      - nominatim
-    image: nginx:latest
-    ports:
-      - '3001:80'
-    volumes:
-      - type: bind
-        source: './vendor/docker/dev-proxy/nginx.conf'
         target: '/etc/nginx/nginx.conf'
 
   openstreetmap-tile-server:
