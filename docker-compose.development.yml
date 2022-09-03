@@ -1,0 +1,50 @@
+version: '3'
+
+volumes:
+  osm-pgdata:
+  osm-tiles:
+  valhalla_tiles:
+  nominatim-data:
+
+services:
+  dev-proxy:
+    depends_on:
+      - openstreetmap-tile-server
+      - valhalla
+      - nominatim
+    image: nginx:latest
+    ports:
+      - '3001:80'
+    volumes:
+      - type: bind
+        source: './vendor/docker/dev-proxy/nginx.conf'
+        target: '/etc/nginx/nginx.conf'
+
+  openstreetmap-tile-server:
+    build: ./vendor/docker/openstreetmap-tile-server/
+    shm_size: 512mb
+    volumes:
+      - osm-pgdata:/var/lib/postgresql/14/main
+      - osm-tiles:/data/tiles
+      - type: bind
+        source: './japan-latest.osm.pbf'
+        target: '/data/region.osm.pbf'
+
+  valhalla:
+    build: ./vendor/docker/valhalla/
+    volumes:
+      - 'valhalla_tiles:/data'
+      - type: bind
+        source: './japan-latest.osm.pbf'
+        target: '/data.osm.pbf'
+
+  nominatim:
+    image: mediagis/nominatim:3.7
+    environment:
+      - PBF_PATH=/nominatim/data.osm.pbf
+      - REPLICATION_URL=https://download.geofabrik.de/asia/japan-updates/
+    volumes:
+      - 'nominatim-data:/var/lib/postgresql/12/main'
+      - type: bind
+        source: './japan-latest.osm.pbf'
+        target: '/nominatim/data.osm.pbf'
