@@ -69,7 +69,7 @@ class WaypointsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip_day
-    @trip = Trip.find(params[:trip_id])
+    @trip = user_trips.find(params[:trip_id])
     @day = @trip.days.find(params[:day_id])
   end
 

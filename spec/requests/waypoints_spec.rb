@@ -32,6 +32,18 @@ RSpec.describe '/waypoints', type: :request do
       get edit_trip_day_waypoint_url(trip, day, waypoint)
       expect(response).to be_successful
     end
+
+    it 'render the form of the owned waypoint' do
+      trip.update(username: 'user1')
+      get edit_trip_day_waypoint_url(trip, day, waypoint), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to be_successful
+    end
+
+    it 'wont render the form of the others waypoint' do
+      trip.update(username: 'user2')
+      get edit_trip_day_waypoint_url(trip, day, waypoint), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe 'POST /create' do
@@ -39,6 +51,15 @@ RSpec.describe '/waypoints', type: :request do
       it 'creates a new Waypoint' do
         expect {
           post trip_day_waypoints_url(trip, day), params: { waypoint: valid_attributes }
+        }.to change(day.waypoints, :count).by(1)
+      end
+
+      it 'creates a owned Waypoint' do
+        trip.update(username: 'user1')
+        expect {
+          post trip_day_waypoints_url(trip, day),
+               params: { waypoint: valid_attributes },
+               headers: { 'X-Forwarded-User' => 'user1' }
         }.to change(day.waypoints, :count).by(1)
       end
 
@@ -65,6 +86,15 @@ RSpec.describe '/waypoints', type: :request do
         post trip_day_waypoints_url(trip, day), params: { waypoint: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
+
+      it 'wont create a Waypoint to others trip' do
+        trip.update(username: 'user2')
+        expect {
+          post trip_day_waypoints_url(trip, day),
+               params: { waypoint: valid_attributes },
+               headers: { 'X-Forwarded-User' => 'user1' }
+        }.not_to change(day.waypoints, :count)
+      end
     end
   end
 
@@ -80,10 +110,28 @@ RSpec.describe '/waypoints', type: :request do
         expect(waypoint.name).to eq new_attributes[:name]
       end
 
+      it 'updates the owned waypoint' do
+        trip.update(username: 'user1')
+        patch trip_day_waypoint_url(trip, day, waypoint),
+              params: { waypoint: new_attributes },
+              headers: { 'X-Forwarded-User' => 'user1' }
+        waypoint.reload
+        expect(waypoint.name).to eq new_attributes[:name]
+      end
+
       it 'redirects to the waypoint' do
         patch trip_day_waypoint_url(trip, day, waypoint), params: { waypoint: new_attributes }
         waypoint.reload
         expect(response).to redirect_to(trip_day_url(trip, day))
+      end
+
+      it 'wont update the others waypoint' do
+        trip.update(username: 'user2')
+        patch trip_day_waypoint_url(trip, day, waypoint),
+              params: { waypoint: new_attributes },
+              headers: { 'X-Forwarded-User' => 'user1' }
+        waypoint.reload
+        expect(waypoint.name).not_to eq new_attributes[:name]
       end
     end
 
@@ -100,6 +148,20 @@ RSpec.describe '/waypoints', type: :request do
       expect {
         delete trip_day_waypoint_url(trip, day, waypoint)
       }.to change(day.waypoints, :count).by(-1)
+    end
+
+    it 'destroys the owned waypoint' do
+      trip.update(username: 'user1')
+      expect {
+        delete trip_day_waypoint_url(trip, day, waypoint), headers: { 'X-Forwarded-User' => 'user1' }
+      }.to change(day.waypoints, :count).by(-1)
+    end
+
+    it 'wont destroy the others waypoint' do
+      trip.update(username: 'user2')
+      expect {
+        delete trip_day_waypoint_url(trip, day, waypoint), headers: { 'X-Forwarded-User' => 'user1' }
+      }.not_to change(day.waypoints, :count)
     end
 
     it 'redirects to the waypoints list' do
