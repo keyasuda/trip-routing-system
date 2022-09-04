@@ -10,23 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_03_131519) do
-
+ActiveRecord::Schema[7.0].define(version: 2021_10_03_131519) do
   create_table "days", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.datetime "start_at", precision: 6
+    t.datetime "start_at"
     t.integer "trip_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["trip_id"], name: "index_days_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "waypoints", force: :cascade do |t|
@@ -37,8 +36,8 @@ ActiveRecord::Schema.define(version: 2021_10_03_131519) do
     t.integer "stop_min"
     t.integer "index"
     t.integer "day_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["day_id"], name: "index_waypoints_on_day_id"
   end
 

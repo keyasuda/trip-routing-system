@@ -20,8 +20,9 @@
 地図データが必要です。[Geofabrik](https://download.geofabrik.de/asia/japan.html)等のプロバイダから入手してください。その後 Docker Compose で導入できます。
 
 1. `wget https://download.geofabrik.de/asia/japan-latest.osm.pbf`
-1. `docker-compose build`
-1. `docker-compose up -d prod-proxy`
+1. `docker compose build`
+1. `docker compose up`
+1. http://localhost:3009 を開く
 
 - 初回起動時は地図データのインポートが行われます
   - マシンスペックにもよりますが数時間かかります
