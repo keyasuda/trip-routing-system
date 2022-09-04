@@ -31,6 +31,14 @@ RSpec.describe '/trips', type: :request do
       get trips_url
       expect(response).to be_successful
     end
+
+    it 'renders only targeted user trips' do
+      trip1 = create(:trip, username: 'user1')
+      trip2 = create(:trip, username: 'user2')
+      get trips_url, headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response.body).to include(trip1.name)
+      expect(response.body).not_to include(trip2.name)
+    end
   end
 
   describe 'GET /show' do
@@ -39,16 +47,29 @@ RSpec.describe '/trips', type: :request do
       get trip_url(trip)
       expect(response).to be_successful
     end
+
+    it 'renders the trip of the user' do
+      trip = create(:trip, username: 'user1')
+      get trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to be_successful
+    end
+
+    it 'wont render the trip of other user' do
+      trip = create(:trip, username: 'user2')
+      get trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe 'GET /show.ics' do
     before do
       VCR.use_cassette 'valhalla_route' do
-        get trip_url(trip, format: :ics)
+        get trip_url(trip, format: :ics), headers:
       end
     end
 
     let(:trip) { create(:unoptimized_day).trip }
+    let(:headers) { {} }
 
     it 'renders a successful response' do
       expect(response).to be_successful
@@ -63,6 +84,24 @@ RSpec.describe '/trips', type: :request do
           expect(event.location).to eq w.plus_code
           expect(event.dtend).to eq (w.stop_min || 0).minutes.since(event.dtstart)
         end
+      end
+    end
+
+    describe 'matched user' do
+      let(:trip) { create(:unoptimized_day).trip.tap { |t| t.update(username: 'user1') } }
+      let(:headers) { { 'X-Forwarded-User' => 'user1' } }
+
+      it 'renders a successful response' do
+        expect(response).to be_successful
+      end
+    end
+
+    describe 'unmatched user' do
+      let(:trip) { create(:unoptimized_day).trip.tap { |t| t.update(username: 'user2') } }
+      let(:headers) { { 'X-Forwarded-User' => 'user1' } }
+
+      it 'renders 404' do
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -80,6 +119,18 @@ RSpec.describe '/trips', type: :request do
       get edit_trip_url(trip)
       expect(response).to be_successful
     end
+
+    it 'renders the trip of the user' do
+      trip = create(:trip, username: 'user1')
+      get edit_trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to be_successful
+    end
+
+    it 'wont render the trip of other user' do
+      trip = create(:trip, username: 'user2')
+      get edit_trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe 'POST /create' do
@@ -88,6 +139,15 @@ RSpec.describe '/trips', type: :request do
         expect {
           post trips_url, params: { trip: valid_attributes }
         }.to change(Trip, :count).by(1)
+      end
+
+      it 'creates a new Trip with username' do
+        expect {
+          post trips_url,
+               params: { trip: valid_attributes },
+               headers: { 'X-Forwarded-User' => 'user1' }
+        }.to change(Trip, :count).by(1)
+        expect(Trip.last.username).to eq 'user1'
       end
 
       it 'redirects to the created trip' do
@@ -123,6 +183,24 @@ RSpec.describe '/trips', type: :request do
         expect(trip.name).to eq new_attributes[:name]
       end
 
+      it 'updates the owned trip' do
+        trip = create(:trip, username: 'user1')
+        patch trip_url(trip),
+              params: { trip: new_attributes },
+              headers: { 'X-Forwarded-User' => 'user1' }
+        trip.reload
+        expect(trip.name).to eq new_attributes[:name]
+      end
+
+      it 'wont update the others trip' do
+        trip = create(:trip, username: 'user2')
+        patch trip_url(trip),
+              params: { trip: new_attributes },
+              headers: { 'X-Forwarded-User' => 'user1' }
+        trip.reload
+        expect(response).to have_http_status(:not_found)
+      end
+
       it 'redirects to the trip' do
         trip = Trip.create! valid_attributes
         patch trip_url(trip), params: { trip: new_attributes }
@@ -152,6 +230,20 @@ RSpec.describe '/trips', type: :request do
       trip = Trip.create! valid_attributes
       delete trip_url(trip)
       expect(response).to redirect_to(trips_url)
+    end
+
+    it 'destroys the owned trip' do
+      trip = create(:trip, username: 'user1')
+      expect {
+        delete trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      }.to change(Trip, :count).by(-1)
+    end
+
+    it 'wont destroy the others trip' do
+      trip = create(:trip, username: 'user2')
+      expect {
+        delete trip_url(trip), headers: { 'X-Forwarded-User' => 'user1' }
+      }.not_to change(Trip, :count)
     end
   end
 end

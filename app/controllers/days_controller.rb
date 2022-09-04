@@ -104,7 +104,7 @@ class DaysController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip
-    @trip = Trip.find(params[:trip_id])
+    @trip = user_trips.find(params[:trip_id])
   end
 
   def set_day

@@ -6,7 +6,7 @@ class TripsController < ApplicationController
   # GET /trips or /trips.json
   def index
     @trips =
-      Trip.
+      user_trips.
       includes(:days).
       order(
         Arel.sql(
@@ -22,7 +22,7 @@ class TripsController < ApplicationController
 
   # GET /trips/new
   def new
-    @trip = Trip.new
+    @trip = user_trips.new
   end
 
   # GET /trips/1/edit
@@ -31,7 +31,7 @@ class TripsController < ApplicationController
 
   # POST /trips or /trips.json
   def create
-    @trip = Trip.new(trip_params)
+    @trip = user_trips.new(trip_params)
 
     respond_to do |format|
       if @trip.save
@@ -70,7 +70,7 @@ class TripsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = user_trips.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

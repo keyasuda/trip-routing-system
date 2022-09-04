@@ -1,0 +1,8 @@
+http_address = "0.0.0.0:4180"
+provider = "github"
+client_id = ""
+client_secret = ""
+email_domains = "*"
+upstreams = "http://localhost:3000/"
+cookie_secret = ""
+redirect_url = "http://localhost:4180/oauth2/callback"
