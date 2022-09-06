@@ -1,6 +1,8 @@
 FROM golang:1.17 as go-builder
 RUN git clone https://github.com/benbjohnson/litestream.git
-RUN cd litestream && go build -ldflags "-s -w -X 'main.Version=latest' -extldflags '-static'" -tags osusergo,netgo,sqlite_omit_load_extension -o /usr/local/bin/litestream ./cmd/litestream
+WORKDIR  /go/litestream
+RUN git checkout e6f7c6052d84b7265fd54d3a3ab33208948e126b
+RUN go build -ldflags "-s -w -X 'main.Version=latest' -extldflags '-static'" -tags osusergo,netgo,sqlite_omit_load_extension -o /usr/local/bin/litestream ./cmd/litestream
 
 FROM ruby:3.1.2 as builder
 
