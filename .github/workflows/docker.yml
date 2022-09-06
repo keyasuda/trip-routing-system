@@ -12,5 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Run tests
+      - name: test app build
+        run: docker build .
+      - name: test compose build
         run: docker compose build
