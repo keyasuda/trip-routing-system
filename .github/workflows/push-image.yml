@@ -1,18 +1,16 @@
 name: Push docker image
 
 on:
-  pull_request:
+  push:
     branches: [main]
-    types: [closed]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  tag:
+  push_image:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     steps:
       - uses: actions/checkout@v2
