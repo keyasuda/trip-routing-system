@@ -167,10 +167,10 @@ leaflet@^1.8.0:
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.8.0.tgz#4615db4a22a304e8e692cae9270b983b38a2055e"
   integrity sha512-gwhMjFCQiYs3x/Sf+d49f10ERXaEFCPr+nVTryhAW8DWbMGqJqt9G4XuIaHmFW08zYvhgdzqXGr8AlW8v8dQkA==
 
-material-icons@^1.11.6:
-  version "1.11.9"
-  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-1.11.9.tgz#f2e0635e2487b52d97d86e348cd4ffba1582e7db"
-  integrity sha512-5dxJ7GyWaAn/s2TqZcLKFT2/AVcKvLJCIiRRvX7w+vx5CA9v3FeRCGoJhB0ChS/lybQHP+W9HO867KiaeQGjsw==
+material-icons@^1.11.10:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-1.11.11.tgz#5c4936d120d05d2ba948c2b055748ea3ab2d6472"
+  integrity sha512-8Cv9oJ4rqIYq0qHeX/Q3WU34qAXk8sXA9/sdg9BwPMKFhE0eGYPpVJMdSgmXNwmgxRxpMs68DceYVxx4jMNmbA==
 
 polyline-encoded@^0.0.9:
   version "0.0.9"
