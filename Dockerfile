@@ -1,11 +1,9 @@
-FROM golang:1.17 as go-builder
-RUN git clone https://github.com/benbjohnson/litestream.git
-RUN cd litestream && go build -ldflags "-s -w -X 'main.Version=latest' -extldflags '-static'" -tags osusergo,netgo,sqlite_omit_load_extension -o /usr/local/bin/litestream ./cmd/litestream
-
 FROM ruby:3.1.2 as builder
 
-RUN apt-get update && apt-get -y install yarnpkg
-RUN ln -s /usr/bin/yarnpkg /usr/bin/yarn
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get -y install yarn
 
 COPY . /app
 WORKDIR /app
