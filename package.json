@@ -7,7 +7,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
-    "esbuild": "^0.15.13",
+    "esbuild": "^0.15.16",
     "leaflet": "^1.9.3",
     "leaflet-extra-markers": "^1.2.1",
     "material-icons": "^1.12.1",
