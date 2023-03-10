@@ -15,10 +15,10 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.6'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '>= 1.1.1'
+gem 'turbo-rails', '>= 1.3.2'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '>= 1.0.4'
+gem 'stimulus-rails', '>= 1.2.1'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
@@ -64,7 +64,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara', '>= 3.37.1'
+  gem 'capybara', '>= 3.38.0'
   gem 'cuprite'
   gem 'vcr'
   gem 'webmock'
@@ -76,7 +76,7 @@ gem 'jsbundling-rails'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 7.0.5'
+gem 'rails-i18n', '~> 7.0.6'
 
 gem 'config'
 
