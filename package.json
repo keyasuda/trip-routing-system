@@ -7,10 +7,10 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.0",
     "@hotwired/turbo-rails": "^7.3.0",
-    "esbuild": "^0.17.6",
+    "esbuild": "^0.17.11",
     "leaflet": "^1.9.3",
     "leaflet-extra-markers": "^1.2.1",
-    "material-icons": "^1.13.1",
+    "material-icons": "^1.13.2",
     "polyline-encoded": "^0.0.9",
     "sortablejs": "^1.15.0",
     "spectre.css": "^0.5.9"
