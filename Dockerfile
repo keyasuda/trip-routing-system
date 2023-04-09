@@ -1,4 +1,4 @@
-FROM ruby:3.1.2 as builder
+FROM ruby:3.2.1 as builder
 
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
@@ -10,7 +10,7 @@ WORKDIR /app
 ENV SECRET_KEY_BASE=hogehoge
 RUN bundle && bundle exec rails assets:precompile
 
-FROM ruby:3.1.2-slim
+FROM ruby:3.2.1-slim
 
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /app /app
