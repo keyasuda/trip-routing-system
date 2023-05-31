@@ -163,10 +163,10 @@ esbuild@^0.17.19:
     "@esbuild/win32-ia32" "0.17.19"
     "@esbuild/win32-x64" "0.17.19"
 
-leaflet-extra-markers@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/leaflet-extra-markers/-/leaflet-extra-markers-1.2.1.tgz#dcea9e0ab3850c4724afa6eda8dda8fa743739fa"
-  integrity sha512-k3mGGBJg5wr4LY89MyLHcWCol3yNC9qcK1+5os+HjBk09RlxmqsywNSBwmpP1WKnkKCIgofnOFOhdM5GeK0kHQ==
+leaflet-extra-markers@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/leaflet-extra-markers/-/leaflet-extra-markers-1.2.2.tgz#e0887ef282fcab53aaf7a5bb6d617ded54aee1d9"
+  integrity sha512-LQUicXhyOwq0wOFtEftJg9IzAGcQI+6mHgh3wsVntrid149BTqsEgh1UcxPPtzcL7xt8jXY0rssfz7DUZuQudg==
 
 leaflet@^1.9.3:
   version "1.9.3"

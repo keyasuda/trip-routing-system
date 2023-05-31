@@ -9,7 +9,7 @@
     "@hotwired/turbo-rails": "^7.3.0",
     "esbuild": "^0.17.19",
     "leaflet": "^1.9.3",
-    "leaflet-extra-markers": "^1.2.1",
+    "leaflet-extra-markers": "^1.2.2",
     "material-icons": "^1.13.6",
     "polyline-encoded": "^0.0.9",
     "sortablejs": "^1.15.0",
