@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
+gem 'rails', '~> 7.0.5', '>= 7.0.5.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  gem 'rspec-rails', '~> 5.0.3'
+  gem 'rspec-rails', '~> 5.1.0'
 end
 
 group :development do
@@ -72,11 +72,11 @@ end
 
 gem 'faraday'
 
-gem 'jsbundling-rails'
+gem 'jsbundling-rails', '>= 1.1.2'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 7.0.6'
+gem 'rails-i18n', '~> 7.0.7'
 
 gem 'config'
 
