@@ -76,7 +76,7 @@ gem 'jsbundling-rails', '>= 1.1.2'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 7.0.7'
+gem 'rails-i18n', '~> 7.0.8'
 
 gem 'config'
 
