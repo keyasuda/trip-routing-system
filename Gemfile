@@ -18,7 +18,7 @@ gem 'puma', '~> 5.6'
 gem 'turbo-rails', '>= 1.4.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '>= 1.2.1'
+gem 'stimulus-rails', '>= 1.2.2'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
