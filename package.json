@@ -10,7 +10,7 @@
     "esbuild": "^0.19.2",
     "leaflet": "^1.9.4",
     "leaflet-extra-markers": "^1.2.2",
-    "material-icons": "^1.13.9",
+    "material-icons": "^1.13.10",
     "polyline-encoded": "^0.0.9",
     "sortablejs": "^1.15.0",
     "spectre.css": "^0.5.9"
