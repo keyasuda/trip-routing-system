@@ -15,10 +15,6 @@
 - オフライン動作
   - インストールすれば旅行中の旅程組み換えをネットワーク接続無しで行なえます
 
-## デモ
-
-https://trs.suzuran.dev/
-
 ## インストール
 
 地図データが必要です。[Geofabrik](https://download.geofabrik.de/asia/japan.html)等のプロバイダから入手してください。その後 Docker Compose で導入できます。
