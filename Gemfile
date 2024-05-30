@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.3', '>= 7.1.3.1'
+gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -21,7 +21,7 @@ gem 'turbo-rails', '>= 1.5.0'
 gem 'stimulus-rails', '>= 1.3.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder', '~> 2.11', '>= 2.11.5'
+gem 'jbuilder', '~> 2.12', '>= 2.12.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'factory_bot_rails', '>= 6.3.0'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  gem 'rspec-rails', '~> 6.0.4'
+  gem 'rspec-rails', '~> 6.1.0'
 end
 
 group :development do
