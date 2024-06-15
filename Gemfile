@@ -65,7 +65,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara', '>= 3.39.1'
-  gem 'cuprite', '>= 0.15'
+  gem 'cuprite', '>= 0.15.1'
   gem 'vcr'
   gem 'webmock'
 end
