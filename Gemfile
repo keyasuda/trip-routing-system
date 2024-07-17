@@ -67,7 +67,7 @@ group :test do
   gem 'capybara', '>= 3.39.1'
   gem 'cuprite', '>= 0.15'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '>= 3.19.0'
 end
 
 gem 'faraday'
