@@ -72,7 +72,7 @@ end
 
 gem 'faraday'
 
-gem 'jsbundling-rails', '>= 1.2.2'
+gem 'jsbundling-rails', '>= 1.3.1'
 
 gem 'open-location-code', '~> 1.0'
 
