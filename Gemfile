@@ -48,7 +48,7 @@ group :development, :test do
   gem 'factory_bot_rails', '>= 6.3.0'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  gem 'rspec-rails', '~> 6.0.4'
+  gem 'rspec-rails', '~> 6.1.4'
 end
 
 group :development do
