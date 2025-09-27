@@ -83,7 +83,7 @@ GEM
     ast (2.4.2)
     base64 (0.2.0)
     benchmark (0.4.0)
-    bigdecimal (3.1.8)
+    bigdecimal (3.2.3)
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
@@ -189,7 +189,7 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    hashdiff (1.1.0)
+    hashdiff (1.2.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     icalendar (2.8.0)
@@ -251,7 +251,7 @@ GEM
     psych (5.2.2)
       date
       stringio
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     puma (6.4.3)
       nio4r (~> 2.0)
     racc (1.8.1)
@@ -305,7 +305,7 @@ GEM
     regexp_parser (2.7.0)
     reline (0.6.0)
       io-console (~> 0.5)
-    rexml (3.4.2)
+    rexml (3.4.4)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -390,7 +390,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webmock (3.23.1)
+    webmock (3.25.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -431,7 +431,7 @@ DEPENDENCIES
   tzinfo-data
   vcr
   web-console (>= 4.2.1)
-  webmock (>= 3.23.1)
+  webmock (>= 3.24.0)
 
 RUBY VERSION
    ruby 3.2.7p253
