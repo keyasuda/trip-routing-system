@@ -18,6 +18,8 @@
 #
 # The default is set to 3 threads as it's deemed a decent compromise between
 # throughput and latency for the average Rails application.
+# Note: This was changed from 5 to 3 threads in newer Rails versions
+# which may affect application throughput, especially for I/O bound operations.
 #
 # Any libraries that use a connection pool or another resource pool should
 # be configured to provide at least as many connections as the number of
