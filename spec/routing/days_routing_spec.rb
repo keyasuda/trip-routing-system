@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DaysController, type: :routing do
+RSpec.describe DaysController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/trips/1/days').to route_to('days#index', trip_id: '1')

@@ -14,7 +14,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/waypoints', type: :request do
+RSpec.describe '/waypoints' do
   let!(:waypoint) { create(:waypoint) }
   let(:day) { waypoint.day }
   let(:trip) { day.trip }

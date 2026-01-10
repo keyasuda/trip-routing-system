@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Day, type: :model do
+RSpec.describe Day do
   describe 'accessors for waypoints' do
     before do
       @day = create(:filled_trip).days.first

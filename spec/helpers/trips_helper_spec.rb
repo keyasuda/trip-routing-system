@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe TripsHelper, type: :helper do
+RSpec.describe TripsHelper do
   let(:day) { create(:unoptimized_day) }
 
   it 'returns Google map URL with plus code of waypoints' do

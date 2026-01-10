@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WaypointsController, type: :routing do
+RSpec.describe WaypointsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/trips/3/days/2/waypoints').not_to route_to('waypoints#index', trip_id: '3', day_id: '2')
