@@ -99,7 +99,8 @@ The application is designed to run in Docker containers with the following servi
 
 ### Backend
 - Ruby 3.2.7
-- Rails 7.1.5+
+- Rails 7.2.0+
+
 - SQLite3 database
 - Faraday for HTTP requests
 - Open Location Code gem for Plus Codes
