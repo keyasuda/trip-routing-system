@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base controller for the application
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound do |_exception|
     render plain: 404, status: :not_found

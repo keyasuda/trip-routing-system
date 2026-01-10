@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model representing a day within a trip
 class Day < ApplicationRecord
   belongs_to :trip
   has_many :waypoints, dependent: :destroy

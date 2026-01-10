@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing day objects within trips
 class DaysController < ApplicationController
   before_action :set_trip
   before_action :set_day, only: %i[show edit update destroy order_waypoints optimize_waypoints]

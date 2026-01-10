@@ -2,6 +2,7 @@
 
 require 'plus_codes/open_location_code'
 
+# Model representing a waypoint within a day
 class Waypoint < ApplicationRecord
   belongs_to :day
   validates :name, presence: true
@@ -50,13 +51,13 @@ class Waypoint < ApplicationRecord
     ret = Faraday.get("#{Settings.search}/search?q=#{ERB::Util.u(keyword)}")
     results = JSON.parse(ret.body)
 
-    results.map { |r|
+    results.map do |r|
       {
         lat: r['lat'].to_f,
         lon: r['lon'].to_f,
         display_name: r['display_name'],
       }
-    }
+    end
   end
 
   def self.get_display_name(pos)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Helper methods for day-related functionality
 module DaysHelper
   def waypoint_eta(day, index)
     offset =

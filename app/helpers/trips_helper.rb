@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Helper methods for trip-related functionality
 module TripsHelper
   def google_map_url(day)
     [

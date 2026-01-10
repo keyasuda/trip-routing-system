@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing trip objects
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
 
