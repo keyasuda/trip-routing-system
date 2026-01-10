@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing waypoint objects within days
 class WaypointsController < ApplicationController
   before_action :set_trip_day
   before_action :set_waypoint, only: %i[show edit update destroy]

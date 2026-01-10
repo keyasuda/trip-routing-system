@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Migration to create the waypoints table
 class CreateWaypoints < ActiveRecord::Migration[7.0]
   def change
     create_table :waypoints do |t|

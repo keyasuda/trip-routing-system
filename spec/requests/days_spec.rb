@@ -246,38 +246,38 @@ RSpec.describe '/days' do
   end
 
   describe 'POST /order_waypoints' do
-    let(:day1) { create(:unoptimized_day) }
-    let(:day2) { create(:day, trip: day1.trip) }
+    let(:source_day) { create(:unoptimized_day) }
+    let(:destination_day) { create(:day, trip: source_day.trip) }
 
     describe 'in single day' do
-      let(:waypoints) { day1.waypoints.map(&:id).reverse }
+      let(:waypoints) { source_day.waypoints.map(&:id).reverse }
 
       it 'set order of waypoints' do
         VCR.use_cassette 'valhalla_reordered_route' do
-          post order_waypoints_trip_day_url(day1.trip, day1),
+          post order_waypoints_trip_day_url(source_day.trip, source_day),
                params: {
                  waypoints_order: {
                    to: {
-                     day_id: day1.id,
+                     day_id: source_day.id,
                      waypoints:,
                    },
                  }.to_json,
                }
         end
 
-        actual = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        actual = source_day.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
         expect(actual).to eq waypoints
       end
 
       it 'set order of owned waypoints' do
-        day1.trip.update(username: 'user1')
+        source_day.trip.update(username: 'user1')
 
         VCR.use_cassette 'valhalla_reordered_route' do
-          post order_waypoints_trip_day_url(day1.trip, day1),
+          post order_waypoints_trip_day_url(source_day.trip, source_day),
                params: {
                  waypoints_order: {
                    to: {
-                     day_id: day1.id,
+                     day_id: source_day.id,
                      waypoints:,
                    },
                  }.to_json,
@@ -288,14 +288,14 @@ RSpec.describe '/days' do
       end
 
       it 'set order of others waypoints' do
-        day1.trip.update(username: 'user2')
+        source_day.trip.update(username: 'user2')
 
         VCR.use_cassette 'valhalla_reordered_route' do
-          post order_waypoints_trip_day_url(day1.trip, day1),
+          post order_waypoints_trip_day_url(source_day.trip, source_day),
                params: {
                  waypoints_order: {
                    to: {
-                     day_id: day1.id,
+                     day_id: source_day.id,
                      waypoints:,
                    },
                  }.to_json,
@@ -308,19 +308,19 @@ RSpec.describe '/days' do
 
     describe 'in two days' do
       before do
-        @waypoints1 = day1.waypoints.map(&:id)
+        @waypoints1 = source_day.waypoints.map(&:id)
         moved = @waypoints1.pop
-        @waypoints2 = day2.waypoints.map(&:id) + [moved]
+        @waypoints2 = destination_day.waypoints.map(&:id) + [moved]
 
-        post order_waypoints_trip_day_url(day1.trip, day1),
+        post order_waypoints_trip_day_url(source_day.trip, source_day),
              params: {
                waypoints_order: {
                  from: {
-                   day_id: day1.id,
+                   day_id: source_day.id,
                    waypoints: @waypoints1,
                  },
                  to: {
-                   day_id: day2.id,
+                   day_id: destination_day.id,
                    waypoints: @waypoints2,
                  },
                }.to_json,
@@ -328,12 +328,12 @@ RSpec.describe '/days' do
       end
 
       it 'set order of waypoints1' do
-        actual1 = day1.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        actual1 = source_day.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
         expect(actual1).to eq @waypoints1
       end
 
       it 'set order of waypoints2' do
-        actual2 = day2.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
+        actual2 = destination_day.waypoints.tap(&:reload).sort { |a, b| a.index <=> b.index }.map(&:id)
         expect(actual2).to eq @waypoints2
       end
     end

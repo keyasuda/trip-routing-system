@@ -128,10 +128,10 @@ RSpec.describe 'trips', vcr: false do
     end
 
     describe 'trip order' do
-      let(:trip1) { create(:day20220101).trip }
-      let(:trip2) { create(:day20220102).trip }
-      let(:trip3) { create(:day20220103).trip }
-      let(:existing_trips) { [trip1, trip2, trip3] }
+      let(:first_trip) { create(:day20220101).trip }
+      let(:second_trip) { create(:day20220102).trip }
+      let(:third_trip) { create(:day20220103).trip }
+      let(:existing_trips) { [first_trip, second_trip, third_trip] }
 
       it 'shows 1/3 as a top' do
         expect(page.all('tr').first).to have_text('2022-01-03')
