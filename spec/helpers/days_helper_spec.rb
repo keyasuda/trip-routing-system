@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DaysHelper, type: :helper do
+RSpec.describe DaysHelper do
   describe 'eta output' do
     subject do
       VCR.use_cassette 'valhalla_route' do

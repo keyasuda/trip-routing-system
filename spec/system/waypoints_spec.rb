@@ -3,7 +3,7 @@
 require 'system_helper'
 # for debug with inspector/irb put page.driver.debug(binding)
 
-RSpec.describe 'waypoints', type: :system do
+RSpec.describe 'waypoints' do
   let(:day) { create(:day20220101) }
   let(:trip) { day.trip }
 
@@ -41,7 +41,7 @@ RSpec.describe 'waypoints', type: :system do
       end
 
       it 'fills name by search result' do
-        expect(page.find('#waypoint-name').value).to include('神戸空港')
+        expect(page.find_by_id('waypoint-name').value).to include('神戸空港')
       end
 
       describe 'create' do
@@ -133,7 +133,7 @@ RSpec.describe 'waypoints', type: :system do
 
       it 'fills name by first result' do
         f = page.all('.pois>li').first.text
-        expect(page.find('#waypoint-name').value).to include(f)
+        expect(page.find_by_id('waypoint-name').value).to include(f)
       end
     end
   end

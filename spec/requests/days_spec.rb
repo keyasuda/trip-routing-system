@@ -14,7 +14,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/days', type: :request do
+RSpec.describe '/days' do
   describe 'GET /index' do
     it 'renders a successful response' do
       day = create(:day)
@@ -163,9 +163,9 @@ RSpec.describe '/days', type: :request do
       let(:headers) { {} }
 
       before do
-        patch trip_day_url(day.trip, day),
+        patch(trip_day_url(day.trip, day),
               params: { day: new_attributes },
-              headers: headers
+              headers:)
         day.reload
       end
 

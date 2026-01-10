@@ -3,7 +3,7 @@
 require 'system_helper'
 # for debug with inspector/irb put page.driver.debug(binding)
 
-RSpec.describe 'trips', type: :system, vcr: false do
+RSpec.describe 'trips', vcr: false do
   let(:existing_trips) { nil }
 
   before do

@@ -3,7 +3,7 @@
 require 'system_helper'
 # for debug with inspector/irb put page.driver.debug(binding)
 
-RSpec.describe 'days', type: :system do
+RSpec.describe 'days' do
   describe 'new day' do
     let(:trip) { create(:trip) }
     let(:name) { 'new day' }
@@ -138,11 +138,11 @@ RSpec.describe 'days', type: :system do
     end
 
     it 'shows the next date as default' do
-      y = page.find('#day_start_at_1i').value
-      m = page.find('#day_start_at_2i').value
-      d = page.find('#day_start_at_3i').value
-      h = page.find('#day_start_at_4i').value
-      i = page.find('#day_start_at_5i').value
+      y = page.find_by_id('day_start_at_1i').value
+      m = page.find_by_id('day_start_at_2i').value
+      d = page.find_by_id('day_start_at_3i').value
+      h = page.find_by_id('day_start_at_4i').value
+      i = page.find_by_id('day_start_at_5i').value
       actual = "#{y}-#{m}-#{d} #{h}:#{i}"
 
       expect(actual).to eq '2022-1-2 10:00'

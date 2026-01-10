@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Waypoint, type: :model do
+RSpec.describe Waypoint do
   describe 'POI name search' do
     it 'searches POIs by keyword' do
       actual =
