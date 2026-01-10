@@ -61,7 +61,6 @@ rails db:migrate
 The application provides a development server script `./bin/dev` that starts all necessary development services using the `Procfile.dev` configuration. This includes:
 - Rails web server on port 3000
 - JavaScript watcher for asset compilation
-- Guard for automated testing/style checking
 - Docker Compose services for external dependencies
 - OAuth2 proxy (if configured)
 

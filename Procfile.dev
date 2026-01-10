@@ -1,5 +1,4 @@
 web: bin/rails server -p 3000
 js: yarn build --watch
-guard: bundle exec guard
 compose: docker compose -f docker-compose.development.yml up
 oauth2-proxy: oauth2-proxy --config=oauth2-proxy.cfg
