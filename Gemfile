@@ -68,7 +68,7 @@ group :test do
   gem 'webmock', '>= 3.24.0'
 end
 
-gem 'faraday'
+gem 'faraday', '>= 2.14.1'
 
 gem 'jsbundling-rails', '>= 1.3.1'
 
