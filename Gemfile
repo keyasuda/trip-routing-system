@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.7'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.2.0'
+gem 'rails', '~> 8.1.2', '>= 8.1.2.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -15,10 +15,10 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 6.4', '>= 6.4.3'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '>= 1.5.0'
+gem 'turbo-rails', '>= 2.0.6'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '>= 1.3.0'
+gem 'stimulus-rails', '>= 1.3.4'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
@@ -45,13 +45,13 @@ group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
   gem 'debug', '>= 1.0.0', platforms: %i[mri mingw x64_mingw]
   gem 'fablicop', '>= 1.10.1', require: false
-  gem 'factory_bot_rails', '>= 6.3.0'
-  gem 'rspec-rails', '~> 6.1.4'
+  gem 'factory_bot_rails', '>= 6.4.4'
+  gem 'rspec-rails', '~> 6.1.5'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console', '>= 4.2.1'
+  gem 'web-console', '>= 4.3.0'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler", ">= 2.3.3"
@@ -74,7 +74,7 @@ gem 'jsbundling-rails', '>= 1.3.1'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 7.0.9'
+gem 'rails-i18n', '~> 8.0.0'
 
 gem 'config'
 
