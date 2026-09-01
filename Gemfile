@@ -46,7 +46,7 @@ group :development, :test do
   gem 'debug', '>= 1.0.0', platforms: %i[mri mingw x64_mingw]
   gem 'fablicop', '>= 1.10.1', require: false
   gem 'factory_bot_rails', '>= 6.3.0'
-  gem 'rspec-rails', '~> 6.1.4'
+  gem 'rspec-rails', '~> 8.0'
 end
 
 group :development do
