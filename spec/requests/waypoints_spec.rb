@@ -84,7 +84,7 @@ RSpec.describe '/waypoints' do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post trip_day_waypoints_url(trip, day), params: { waypoint: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'wont create a Waypoint to others trip' do
@@ -138,7 +138,7 @@ RSpec.describe '/waypoints' do
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         patch trip_day_waypoint_url(trip, day, waypoint), params: { waypoint: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

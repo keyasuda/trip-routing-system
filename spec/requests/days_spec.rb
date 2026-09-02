@@ -148,7 +148,7 @@ RSpec.describe '/days' do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post trip_days_url(trip), params: { day: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
@@ -211,7 +211,7 @@ RSpec.describe '/days' do
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         patch trip_day_url(day.trip, day), params: { day: { name: '' } }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
