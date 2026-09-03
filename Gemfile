@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.7'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 8.0.5.1'
+gem 'rails', '~> 8.1.3.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.1'
@@ -74,7 +74,7 @@ gem 'jsbundling-rails', '>= 1.3.1'
 
 gem 'open-location-code', '~> 1.0'
 
-gem 'rails-i18n', '~> 8.0'
+gem 'rails-i18n', '~> 8.1'
 
 gem 'config'
 
