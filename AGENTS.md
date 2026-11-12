@@ -97,7 +97,7 @@ The application is designed to run in Docker containers with the following servi
 ## Key Dependencies
 
 ### Backend
-- Ruby 3.2.7
+- Ruby 4.0.9
 - Rails 7.2.0+
 
 - SQLite3 database

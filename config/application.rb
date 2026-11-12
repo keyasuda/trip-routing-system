@@ -4,6 +4,9 @@ require_relative 'boot'
 
 require 'rails/all'
 
+# Ruby 4.0 compatibility shim: vcr 6.1.0 needs CGI.parse at load time.
+require_relative '../lib/vcr_cgi_compat'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

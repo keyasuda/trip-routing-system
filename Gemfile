@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.7'
+ruby '4.0.9'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.1.4'
@@ -42,6 +42,8 @@ gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  # benchmark is no longer a default gem since Ruby 4.0; rubocop needs it
+  gem 'benchmark', require: false
   # Start debugger with binding.b [https://github.com/ruby/debug]
   gem 'debug', '>= 1.0.0', platforms: %i[mri mingw x64_mingw]
   gem 'fablicop', '>= 1.10.1', require: false

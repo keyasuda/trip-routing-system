@@ -3,6 +3,9 @@ inherit_gem:
     - 'config/.base_rubocop.yml'
 
 AllCops:
+  # fablicop 1.10.3 (rubocop ~> 1.48) cannot detect Ruby 4.0 from .ruby-version.
+  # Pin to the highest version it supports; the code itself uses no newer syntax.
+  TargetRubyVersion: 3.3
   Exclude:
     - 'bin/*'
     - 'vendor/**/*'
