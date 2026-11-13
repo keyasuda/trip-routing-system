@@ -95,6 +95,9 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
 end
 
+# Ruby 4.0 compatibility shim: vcr needs CGI.parse at load time.
+require_relative '../lib/vcr_cgi_compat'
+
 require 'vcr'
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr'
